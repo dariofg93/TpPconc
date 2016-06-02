@@ -1,10 +1,12 @@
 package tpConcurrente;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
 public class MonitorConcurDerivative {
 
+	private ArrayList<ArrayList<Integer>> recorridos = new ArrayList<ArrayList<Integer>>();
 	private Integer threadsTotal; //la cantidad maxima de threads a utilizar
 	private double[] elements;
 	//private Integer load; 		  //la cantidad de elementos en la que puede 
@@ -52,6 +54,27 @@ public class MonitorConcurDerivative {
 		}
 	}
 	
+	public ArrayList<Integer> numerosHasta(){
+		
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		
+		for(int i = 0 ; i < elements.length -1 ; i++)
+			list.add(i);
+		return list;
+	}
+	
+	public void asignarUnLugarA(ConcurUser t,Integer n){
+		t.añadirRecorrido(n);
+	}
+	
+	public void add(MonitorConcurDerivative monitor){
+		//cantThreadsActual ++;
+		//if(this.noEstaOcupado){
+		for(Integer actual: recorridos.get(0)){
+		elements[actual] = elements[actual] + monitor.getVector()[actual];
+		}
+	}
+	
 	public Boolean hayEspacio(){
 		return threadsTotal != cantThreadsActual;
 	}
@@ -60,9 +83,9 @@ public class MonitorConcurDerivative {
 		return elements;
 	}
 
-	public void setEn(int value, int[] recorrido) {
-		
-		
+
+	public void agregarRecorrido(ArrayList<Integer> recorrido) {
+		recorridos.add(recorrido);
 	}
 	
 	/** Returns the dimension of this vector, that is, its width. 
