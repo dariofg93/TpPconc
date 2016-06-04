@@ -63,7 +63,7 @@ public class MonitorConcurDerivative {
 	}
 	
 	public void asignarUnLugarA(ConcurUser t,Integer n){
-		t.añadirRecorrido(n);
+		t.aÃ±adirRecorrido(n);
 	}
 	
 	public void add(MonitorConcurDerivative monitor){
