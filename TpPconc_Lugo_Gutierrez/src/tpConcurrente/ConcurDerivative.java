@@ -108,5 +108,4 @@ public class ConcurDerivative {
 			result.set(i - 1, (get(i+1) - get(i-1)) / 2);
 		return result;
 	}
-	
 }

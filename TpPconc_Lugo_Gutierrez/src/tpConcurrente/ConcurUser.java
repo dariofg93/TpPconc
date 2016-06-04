@@ -34,7 +34,7 @@ public class ConcurUser extends Thread{
 		}
 	}
 
-	public void aÃ±adirRecorrido(Integer n) {
+	public void añadirRecorrido(Integer n) {
 		recorrido.add(n);
 		
 	}
