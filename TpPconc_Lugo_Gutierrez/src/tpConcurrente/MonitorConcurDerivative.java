@@ -1,18 +1,16 @@
 package tpConcurrente;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 
 public class MonitorConcurDerivative {
 
-	private ArrayList<ArrayList<Integer>> recorridos = new ArrayList<ArrayList<Integer>>();
+	private ArrayList<ArrayList<Integer>> recorridos;
 	private Integer threadsTotal; //la cantidad maxima de threads a utilizar
 	private double[] elements;
 	//private Integer load; 		  //la cantidad de elementos en la que puede 
 	//LO INGNORAMOS POR AHORA		  //diferir la asignacion a cada thread;	x>=1>0
 	
-	private int[] indiceActual; // Array de 10 numeros que vayan de 0 a 9. 
+	//private int[] indiceActual; // Array de 10 numeros que vayan de 0 a 9. 
 	private Integer cantThreadsActual;
 	private Boolean noEstaOcupado = true;
 	
@@ -21,6 +19,7 @@ public class MonitorConcurDerivative {
 		elements = new double[size];
 		cantThreadsActual = 0;
 		threadsTotal = cantTotal;
+		recorridos = new ArrayList<ArrayList<Integer>>();
 	}
 	
 	
@@ -31,19 +30,19 @@ public class MonitorConcurDerivative {
 		return elements.length;
 	}
 	
-	public synchronized void set(int i,double d){
+	public synchronized void set(int lugar,double valor){
 		
 		cantThreadsActual ++;
 		if(this.noEstaOcupado){
-		elements[i] = d;
+			this.noEstaOcupado = false;
+			elements[lugar] = valor;
 		
-		this.noEstaOcupado = false;
 		/** Si el primer entra, como el metodo es synchronized el segundo thread 
 			necesariamente debe esperar que termine el primero para ejecutarse o no.*/
-		while(cantThreadsActual != threadsTotal);
-			this.notifyAll();
-			this.noEstaOcupado = true;
-			this.cantThreadsActual = 0;
+			while(cantThreadsActual != threadsTotal);
+				this.notifyAll();
+				this.noEstaOcupado = true;
+				this.cantThreadsActual = 0;
 		}
 		else{
 			try {

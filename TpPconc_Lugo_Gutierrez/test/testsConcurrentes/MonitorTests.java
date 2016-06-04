@@ -28,9 +28,9 @@ public class MonitorTests {
 		
 		MonitorConcurDerivative monitor = new MonitorConcurDerivative(10, 5);
 		creacionDeThreads(5,2,monitor);
+		
+		System.out.println(monitor.getVector()[3]);
 		assertEquals(monitor.dimension(),10);
-		
-		
 	}
 	
 	@Test
