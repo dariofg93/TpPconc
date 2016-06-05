@@ -12,9 +12,9 @@ import tpConcurrente.MonitorConcurDerivative;
 public class MonitorTests {
 
 	
-	public void creacionDeThreads(int cantThreads,int funcion,MonitorConcurDerivative monitor){
+	private void creacionDeThreads(int cantThreads,int funcion,MonitorConcurDerivative monitor){
 		
-		ArrayList<Integer> totalIndex = monitor.numerosHasta();
+		ArrayList<Integer> totalIndex = monitor.numerosHastaSize();
 		
 		for(int i = 0 ; i<cantThreads ; i++){
 			ConcurUser thread = new ConcurUser(funcion,monitor);
@@ -41,6 +41,10 @@ public class MonitorTests {
 		//monitor.set(0,10);
 		
 		creacionDeThreads(5,1,monitor);
+
+
+		ArrayList<Integer> index = monitor.numerosHastaSize();
+		System.out.print(index.remove(20));
 		/**for(int i = 0; i<10; i++){
 
 			System.out.print(monitor.getVector()[i]);
