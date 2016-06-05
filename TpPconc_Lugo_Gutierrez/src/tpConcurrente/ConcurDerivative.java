@@ -105,7 +105,7 @@ public class ConcurDerivative {
 	public ConcurDerivative differentiate() {
 		ConcurDerivative result = new ConcurDerivative(dimension() - 2);
 		for (int i = 1; i < dimension() - 1; ++i)
-			result.set(i - 1, (get(i+1) - get(i-1)) / 2);
+			result.set(i - 1, (get(i+1) - get(i+1)) / 2);
 		return result;
 	}
 }
