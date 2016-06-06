@@ -6,9 +6,7 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-import threads.ComplexUser;
-import threads.ConcurUser;
-import threads.SimpleUser;
+import threads.*;
 import tpConcurrente.MonitorConcurDerivative;
 
 public class MonitorTests {
