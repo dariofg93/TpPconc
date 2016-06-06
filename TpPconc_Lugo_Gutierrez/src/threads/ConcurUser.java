@@ -6,13 +6,14 @@ import tpConcurrente.MonitorConcurDerivative;
 
 public abstract class ConcurUser extends Thread{
 
-	protected int caso;
 	protected MonitorConcurDerivative concurDerivative;
+	protected Integer caso;
+	protected Integer[] setCase;
 	
-	
-	public ConcurUser(MonitorConcurDerivative monitor, Integer funcion){
+	public ConcurUser(MonitorConcurDerivative monitor, Integer funcion, Integer[] set){
 		this.caso = funcion;
 		this.concurDerivative = monitor;
+		this.setCase = set;
 	}
 	
 	public abstract void añadirAlRecorrido(Integer n);

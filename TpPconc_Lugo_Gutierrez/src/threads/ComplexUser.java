@@ -9,8 +9,8 @@ public class ComplexUser extends ConcurUser {
 	private MonitorConcurDerivative repuesto;
 	private ArrayList<Integer> recorrido;
 
-	public ComplexUser(MonitorConcurDerivative monitor, MonitorConcurDerivative otroMonitor, Integer funcion) {
-		super(monitor,funcion);
+	public ComplexUser(MonitorConcurDerivative monitor, MonitorConcurDerivative otroMonitor, Integer funcion, Integer[] set) {
+		super(monitor,funcion,set);
 		this.repuesto = otroMonitor;
 		this.recorrido = new ArrayList<Integer>();
 	}
@@ -21,7 +21,7 @@ public class ComplexUser extends ConcurUser {
 		switch (caso) {
 		case 1 : System.out.println("NO CORRESPONDE LA OPERACION A UN USUARIO SIMPLE");
 				 break;
-		case 2 : concurDerivative.set(3,5);
+		case 2 : concurDerivative.set(setCase[0],setCase[1]);
 				 break;
 		}
 	}

@@ -16,6 +16,9 @@ public class MonitorTests {
 	
 	MonitorConcurDerivative monitorTest;
 	GeneratorThreads generador;
+	Integer[] x;
+	Integer y;
+	Integer z;
 	
 	@Before
 	public void setUp(){
@@ -26,8 +29,9 @@ public class MonitorTests {
 	@Test
 	public void setConIndex() {
 		
-		generador.comenzarThreads(UsersType.SIMPLEUSER,monitorTest,null,5,2);
-		
+		generador.comenzarThreads(UsersType.SIMPLEUSER,monitorTest,null,
+												5,2,new Integer[]{3,25});
+
 		System.out.println(monitorTest.getVector()[3]);
 		assertEquals(monitorTest.dimension(),10);
 	}
