@@ -2,47 +2,40 @@ package tpConcurrente;
 
 import java.util.ArrayList;
 
+import threads.ConcurUser;
+
 public class MonitorConcurDerivative {
 
-	private ArrayList<ArrayList<Integer>> recorridos;
-	private Integer threadsTotal; //la cantidad maxima de threads a utilizar
-	private double[] elements;
-	//private Integer load; 		  //la cantidad de elementos en la que puede 
-	//LO INGNORAMOS POR AHORA		  //diferir la asignacion a cada thread;	x>=1>0
-	
-	//private int[] indiceActual; // Array de 10 numeros que vayan de 0 a 9. 
-	private Integer cantThreadsActual;
-	
-	
-	//recorro el conjunto que me da numerosHasta() con una nueva funcion 
-	//asignarRecorrido(int i) que le asigna a cada thread dos lugares y
-	// devuelvo el set sin esos dos numeros usados.
+	private Integer threadsTotal; 		//la cantidad maxima de threads a utilizar
+	private double[] elements;			//el vector que se recorre de ser necesario
+	private Integer cantThreadsActual;	//cantidad de threads que interactuan con el monitor actualmente
 	
 	public MonitorConcurDerivative(int size, Integer cantTotal) {
 		elements = new double[size];
 		cantThreadsActual = 0;
 		threadsTotal = cantTotal;
-		recorridos = new ArrayList<ArrayList<Integer>>();
 	}
 	
-	
-	/**his.creacionDeThreads(threadsTotal,2); Este metodo va en el principio de cada 
-	  test para inicializar los threads*/
-	
+	//redefinir
 	public int dimension() {
 		return elements.length;
 	}
 	
+	//creo que ya esta bien.. lastima que los try lo deja tan feo al codigo...
 	public synchronized void set(int lugar,double valor){
 		
 		cantThreadsActual ++;
 		
 		if(cantThreadsActual>1){
 			elements[lugar] = valor;
-		
-		/** Si el primer entra, como el metodo es synchronized el segundo thread 
-			necesariamente debe esperar que termine el primero para ejecutarse o no.*/
-			while(hayEspacio());
+			
+			while(hayEspacio()){
+				try {
+					this.wait();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
 			this.notifyAll();
 			this.cantThreadsActual = 0;
 		}
@@ -63,17 +56,14 @@ public class MonitorConcurDerivative {
 		//}
 	}
 	
+	//Devuelve true si aun no han ingresado todos los threads
 	public Boolean hayEspacio(){
 		return threadsTotal != cantThreadsActual;
 	}
 
+	//Devuelve el vector del monitor(si no se usa en ningun lado se borrará)
 	public double[] getVector() {
 		return elements;
-	}
-
-
-	public void agregarRecorrido(ArrayList<Integer> recorrido) {
-		recorridos.add(recorrido);
 	}
 
 	//Prop: Asigno un recorrido a un thread con un size correspondiente a
@@ -81,13 +71,8 @@ public class MonitorConcurDerivative {
 	// recorrido sobrante
 	public ArrayList<Integer> asignarRecorrido(ConcurUser user, ArrayList<Integer> rec, Integer threadsFaltantes) {
 		ArrayList<Integer> recCortado = rec;
-		Integer i = 2;
-		/**(elements.length / cantThreadsActual) + 
-			(rec.size() % threadsFaltantes);		CON ESTO SACAMOS LO DE LA 
-													CANTIDAD QUE DEBE RECORRER
-													CADA THREAD, HAY QUE
-													HACERLO ANDAR			*/
-		
+		Integer i = (elements.length / cantThreadsActual) + 
+					(rec.size() % threadsFaltantes);
 		while(i>0){
 			user.añadirAlRecorrido(recCortado.get(0));
 			recCortado.remove(0);
@@ -96,6 +81,7 @@ public class MonitorConcurDerivative {
 		return recCortado;
 	}
 	
+	//Devuelve una lista desde 0 hasta el size-1 del vector del monitor
 	public ArrayList<Integer> numerosHastaSize(){
 		
 		ArrayList<Integer> list = new ArrayList<Integer>();
