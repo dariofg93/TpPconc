@@ -61,6 +61,8 @@ public class MonitorConcurDerivative {
 		return threadsTotal != cantThreadsActual;
 	}
 
+	/**##################   Asigna Recorrido   ##########################*/
+	
 	//Devuelve el vector del monitor(si no se usa en ningun lado se borrará)
 	public double[] getVector() {
 		return elements;

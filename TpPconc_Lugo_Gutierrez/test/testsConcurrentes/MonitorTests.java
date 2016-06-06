@@ -22,7 +22,7 @@ public class MonitorTests {
 	
 	@Before
 	public void setUp(){
-		monitorTest = new MonitorConcurDerivative(10, 5);
+		monitorTest = new MonitorConcurDerivative(20, 12);
 		generador = new GeneratorThreads();
 	}
 	
@@ -30,10 +30,10 @@ public class MonitorTests {
 	public void setConIndex() {
 		
 		generador.comenzarThreads(UsersType.SIMPLEUSER,monitorTest,null,
-												5,2,new Integer[]{3,25});
+												12,2,new Integer[]{3,25});
 
 		System.out.println(monitorTest.getVector()[3]);
-		assertEquals(monitorTest.dimension(),10);
+		assertEquals(monitorTest.dimension(),20);
 	}
 	
 	@Test
