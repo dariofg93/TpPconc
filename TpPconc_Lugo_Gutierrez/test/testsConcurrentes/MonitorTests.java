@@ -25,12 +25,13 @@ public class MonitorTests {
 	
 	private void inicializarThreads(ArrayList<ConcurUser> users){
 
-		
+		Integer threadsFaltantes = users.size();
 		ArrayList<Integer> indexOfVector;
 		indexOfVector = users.get(0).getMonitor().numerosHastaSize();
 		
 		for(ConcurUser t: users){
-			indexOfVector = t.getMonitor().asignarRecorrido(t, indexOfVector);
+			indexOfVector = t.getMonitor().asignarRecorrido(t, indexOfVector, threadsFaltantes);
+			threadsFaltantes--;
 			t.start();
 		}
 	}

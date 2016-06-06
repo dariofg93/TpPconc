@@ -41,4 +41,8 @@ public class ConcurUser extends Thread{
 	public MonitorConcurDerivative getMonitor(){
 		return concurDerivative;
 	}
+	
+	public ArrayList<Integer> getRecorrido(){
+		return recorrido;
+	}
 }

@@ -12,7 +12,6 @@ public class MonitorConcurDerivative {
 	
 	//private int[] indiceActual; // Array de 10 numeros que vayan de 0 a 9. 
 	private Integer cantThreadsActual;
-	private Boolean noEstaOcupado = true;
 	
 	
 	//recorro el conjunto que me da numerosHasta() con una nueva funcion 
@@ -37,16 +36,15 @@ public class MonitorConcurDerivative {
 	public synchronized void set(int lugar,double valor){
 		
 		cantThreadsActual ++;
-		if(this.noEstaOcupado){
-			this.noEstaOcupado = false;
+		
+		if(cantThreadsActual>1){
 			elements[lugar] = valor;
 		
 		/** Si el primer entra, como el metodo es synchronized el segundo thread 
 			necesariamente debe esperar que termine el primero para ejecutarse o no.*/
-			while(cantThreadsActual != threadsTotal);
-				this.notifyAll();
-				this.noEstaOcupado = true;
-				this.cantThreadsActual = 0;
+			while(hayEspacio());
+			this.notifyAll();
+			this.cantThreadsActual = 0;
 		}
 		else{
 			try {
@@ -81,20 +79,21 @@ public class MonitorConcurDerivative {
 	//Prop: Asigno un recorrido a un thread con un size correspondiente a
 	// la cantidad de elementos que debe recorrer. Devuelve el 
 	// recorrido sobrante
-	public ArrayList<Integer> asignarRecorrido(ConcurUser user, ArrayList<Integer> rec) {
+	public ArrayList<Integer> asignarRecorrido(ConcurUser user, ArrayList<Integer> rec, Integer threadsFaltantes) {
 		ArrayList<Integer> recCortado = rec;
 		Integer i = 2;
+		/**(elements.length / cantThreadsActual) + 
+			(rec.size() % threadsFaltantes);		CON ESTO SACAMOS LO DE LA 
+													CANTIDAD QUE DEBE RECORRER
+													CADA THREAD, HAY QUE
+													HACERLO ANDAR			*/
 		
 		while(i>0){
-			asignarUnLugarA(user,recCortado.get(0));
+			user.añadirAlRecorrido(recCortado.get(0));
 			recCortado.remove(0);
 			i--;
 		}
 		return recCortado;
-	}
-	
-	public void asignarUnLugarA(ConcurUser t,Integer n){
-		t.añadirAlRecorrido(n);
 	}
 	
 	public ArrayList<Integer> numerosHastaSize(){
