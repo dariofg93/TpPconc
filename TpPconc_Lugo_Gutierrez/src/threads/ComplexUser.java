@@ -9,8 +9,8 @@ public class ComplexUser extends ConcurUser {
 	private MonitorConcurDerivative repuesto;
 	private ArrayList<Integer> recorrido;
 
-	public ComplexUser(int n, MonitorConcurDerivative monitor, MonitorConcurDerivative otroMonitor) {
-		super(n, monitor);
+	public ComplexUser(MonitorConcurDerivative monitor, MonitorConcurDerivative otroMonitor, Integer funcion) {
+		super(monitor,funcion);
 		this.repuesto = otroMonitor;
 		this.recorrido = new ArrayList<Integer>();
 	}

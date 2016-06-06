@@ -6,9 +6,8 @@ import tpConcurrente.MonitorConcurDerivative;
 
 public class SimpleUser extends ConcurUser{
 
-	public SimpleUser(int n, MonitorConcurDerivative monitor) {
-		super(n, monitor);
-		// TODO Auto-generated constructor stub
+	public SimpleUser(MonitorConcurDerivative monitor, Integer funcion){
+		super(monitor,funcion);
 	}
 	
 	@Override

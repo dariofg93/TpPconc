@@ -10,8 +10,8 @@ public abstract class ConcurUser extends Thread{
 	protected MonitorConcurDerivative concurDerivative;
 	
 	
-	public ConcurUser(int n, MonitorConcurDerivative monitor){
-		this.caso = n;
+	public ConcurUser(MonitorConcurDerivative monitor, Integer funcion){
+		this.caso = funcion;
 		this.concurDerivative = monitor;
 	}
 	
