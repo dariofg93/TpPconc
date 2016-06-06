@@ -11,23 +11,37 @@ import tpConcurrente.MonitorConcurDerivative;
 
 public class MonitorTests {
 
+	/**############### Creacion e inicializacion de Threads ##############*/
 	
-	private void creacionDeThreads(int cantThreads,int funcion,MonitorConcurDerivative monitor){
+	private ArrayList<ConcurUser> creacionDeThreads(
+			int cantThreads,int funcion,MonitorConcurDerivative monitor){
 		
-		ArrayList<Integer> totalIndex = monitor.numerosHastaSize();
+		ArrayList<ConcurUser> threads = new ArrayList<ConcurUser>();
+		for(int i = 0 ; i<cantThreads ; i++)
+			threads.add(new ConcurUser(funcion,monitor));
 		
-		for(int i = 0 ; i<cantThreads ; i++){
-			ConcurUser thread = new ConcurUser(funcion,monitor);
-			for(int x = 0; x<2; x++)
-				monitor.asignarUnLugarA(thread, i);
-			thread.start();
+		return threads;
+	}
+	
+	private void inicializarThreads(ArrayList<ConcurUser> users){
+
+		
+		ArrayList<Integer> indexOfVector;
+		indexOfVector = users.get(0).getMonitor().numerosHastaSize();
+		
+		for(ConcurUser t: users){
+			indexOfVector = t.getMonitor().asignarRecorrido(t, indexOfVector);
+			t.start();
 		}
 	}
+	
+	/**##################################################################*/
+	
 	@Test
 	public void setConIndex() {
 		
 		MonitorConcurDerivative monitor = new MonitorConcurDerivative(10, 5);
-		creacionDeThreads(5,2,monitor);
+		inicializarThreads(creacionDeThreads(5,2, monitor));
 		
 		System.out.println(monitor.getVector()[3]);
 		assertEquals(monitor.dimension(),10);
@@ -37,18 +51,14 @@ public class MonitorTests {
 	public void add() {
 		
 		MonitorConcurDerivative monitor = new MonitorConcurDerivative(10, 5);
-		//for(int i = 0 ; i<9 ; i++){
-		//monitor.set(0,10);
 		
-		creacionDeThreads(5,1,monitor);
-
+		inicializarThreads(creacionDeThreads(5,1, monitor));
 
 		ArrayList<Integer> index = monitor.numerosHastaSize();
-		System.out.print(index.remove(20));
+		System.out.print(index.get(1));
 		/**for(int i = 0; i<10; i++){
 
-			System.out.print(monitor.getVector()[i]);
+			System.out.print(monitor.getVector()[i]+" Y ");
 		}*/
-		
 	}
 }

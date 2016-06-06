@@ -11,9 +11,7 @@ public class ConcurUser extends Thread{
 	public ConcurUser(int n, MonitorConcurDerivative monitor){
 		this.caso = n;
 		this.concurDerivative = monitor;
-		
 		this.recorrido = new ArrayList<Integer>();
-		monitor.asignarRecorrido(this);
 	}
 	
 	private MonitorConcurDerivative nuevoMonitor(){
@@ -38,6 +36,9 @@ public class ConcurUser extends Thread{
 
 	public void añadirAlRecorrido(Integer n) {
 		recorrido.add(n);
-		
+	}
+	
+	public MonitorConcurDerivative getMonitor(){
+		return concurDerivative;
 	}
 }

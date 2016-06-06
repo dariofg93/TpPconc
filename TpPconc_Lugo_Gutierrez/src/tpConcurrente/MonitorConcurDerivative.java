@@ -81,32 +81,28 @@ public class MonitorConcurDerivative {
 	//Prop: Asigno un recorrido a un thread con un size correspondiente a
 	// la cantidad de elementos que debe recorrer. Devuelve el 
 	// recorrido sobrante
-	public ArrayList<Integer> asignarRecorrido(ConcurUser user) {
-		ArrayList<Integer> recCortado = numerosHastaSize();
+	public ArrayList<Integer> asignarRecorrido(ConcurUser user, ArrayList<Integer> rec) {
+		ArrayList<Integer> recCortado = rec;
 		Integer i = 2;
 		
 		while(i>0){
 			asignarUnLugarA(user,recCortado.get(0));
 			recCortado.remove(0);
+			i--;
 		}
 		return recCortado;
-	}
-	
-	public ArrayList<Integer> numerosHastaSize(){
-		
-		ArrayList<Integer> set = new ArrayList<Integer>();
-		
-		for(int i = 0 ; i < elements.length -1 ; i++)
-			set.add(i);
-		return set;
 	}
 	
 	public void asignarUnLugarA(ConcurUser t,Integer n){
 		t.añadirAlRecorrido(n);
 	}
 	
-	/** Returns the dimension of this vector, that is, its width. 
-	public int dimension() {
-		return elements.length;
-	}*/
+	public ArrayList<Integer> numerosHastaSize(){
+		
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		
+		for(int i = 0 ; i < elements.length; i++)
+			list.add(i);
+		return list;
+	}
 }
