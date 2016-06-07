@@ -31,14 +31,14 @@ public class GeneratorThreads {
 
 	//Dada una lista de threads, le da los valores necesarios finales(si
 	// es necesario) y los inicializa
-	private void inicializarThreads(ArrayList<ConcurUser> users){
+	private void inicializarThreads(ArrayList<ConcurUser> users,MonitorConcurDerivative monitor){
 
 		Integer threadsFaltantes = users.size();
 		ArrayList<Integer> indexOfVector;
-		indexOfVector = users.get(0).getMonitor().numerosHastaSize();
+		indexOfVector = monitor.numerosHastaSize();
 	
 		for(ConcurUser t: users){
-			indexOfVector = t.getMonitor().asignarRecorrido(t, indexOfVector, threadsFaltantes);
+			indexOfVector = monitor.asignarRecorrido(t, indexOfVector, threadsFaltantes);
 			threadsFaltantes--;
 			t.start();
 		}
@@ -52,6 +52,6 @@ public class GeneratorThreads {
 		
 		ArrayList<ConcurUser> threads = creacionDeThreads(
 				user,monitor,otroMonitor,cantThreads,funcion,setORget);
-		inicializarThreads(threads);
+		inicializarThreads(threads,monitor);
 	}
 }

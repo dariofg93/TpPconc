@@ -22,13 +22,5 @@ public abstract class ConcurUser extends Thread{
 		recorrido.add(n);
 	}
 	
-	public ArrayList<Integer> getRecorrido(){
-		return recorrido;
-	}
-	
-	public MonitorConcurDerivative getMonitor(){
-		return concurDerivative;
-	}
-	
 	public abstract Integer IdUser();
 }
