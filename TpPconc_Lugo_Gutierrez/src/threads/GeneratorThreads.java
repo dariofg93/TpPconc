@@ -33,19 +33,15 @@ public class GeneratorThreads {
 	// es necesario) y los inicializa
 	private void inicializarThreads(ArrayList<ConcurUser> users){
 
-		if(users.get(0).IdUser().equals(1)){
-			Integer threadsFaltantes = users.size();
-			ArrayList<Integer> indexOfVector;
-			indexOfVector = users.get(0).getMonitor().numerosHastaSize();
-		
-			for(ConcurUser t: users){
-				indexOfVector = t.getMonitor().asignarRecorrido(t, indexOfVector, threadsFaltantes);
-				threadsFaltantes--;
-			}
-		}
-		
-		for(ConcurUser t: users)
+		Integer threadsFaltantes = users.size();
+		ArrayList<Integer> indexOfVector;
+		indexOfVector = users.get(0).getMonitor().numerosHastaSize();
+	
+		for(ConcurUser t: users){
+			indexOfVector = t.getMonitor().asignarRecorrido(t, indexOfVector, threadsFaltantes);
+			threadsFaltantes--;
 			t.start();
+		}
 	}
 
 	//Metodo publico para la generacion de threads desde un test

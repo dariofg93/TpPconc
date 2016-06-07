@@ -1,18 +1,14 @@
 package threads;
 
-import java.util.ArrayList;
-
 import tpConcurrente.MonitorConcurDerivative;
 
 public class ComplexUser extends ConcurUser {
 	
 	private MonitorConcurDerivative repuesto;
-	private ArrayList<Integer> recorrido;
 
 	public ComplexUser(MonitorConcurDerivative monitor, MonitorConcurDerivative otroMonitor, Integer funcion, Integer[] set) {
 		super(monitor,funcion,set);
 		this.repuesto = otroMonitor;
-		this.recorrido = new ArrayList<Integer>();
 	}
 
 	@Override
@@ -29,14 +25,5 @@ public class ComplexUser extends ConcurUser {
 	@Override
 	public Integer IdUser() {
 		return 1;
-	}
-	@Override
-	public void añadirAlRecorrido(Integer n) {
-		recorrido.add(n);
-	}
-	
-	@Override
-	public ArrayList<Integer> getRecorrido(){
-		return recorrido;
 	}
 }

@@ -73,7 +73,7 @@ public class MonitorConcurDerivative {
 	// recorrido sobrante
 	public ArrayList<Integer> asignarRecorrido(ConcurUser user, ArrayList<Integer> rec, Integer threadsFaltantes) {
 		ArrayList<Integer> recCortado = rec;
-		Integer i = (elements.length / cantThreadsActual) + 
+		Integer i = (elements.length / threadsTotal) + 
 					(rec.size() % threadsFaltantes);
 		while(i>0){
 			user.añadirAlRecorrido(recCortado.get(0));

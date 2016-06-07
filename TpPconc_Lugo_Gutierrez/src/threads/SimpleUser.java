@@ -1,7 +1,5 @@
 package threads;
 
-import java.util.ArrayList;
-
 import tpConcurrente.MonitorConcurDerivative;
 
 public class SimpleUser extends ConcurUser{
@@ -24,12 +22,5 @@ public class SimpleUser extends ConcurUser{
 	@Override
 	public Integer IdUser() {
 		return 0;
-	}
-
-	@Override
-	public void añadirAlRecorrido(Integer n) {}
-	
-	public ArrayList<Integer> getRecorrido(){
-		return new ArrayList<Integer>();
 	}
 }

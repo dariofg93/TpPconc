@@ -16,9 +16,6 @@ public class MonitorTests {
 	
 	MonitorConcurDerivative monitorTest;
 	GeneratorThreads generador;
-	Integer[] x;
-	Integer y;
-	Integer z;
 	
 	@Before
 	public void setUp(){
