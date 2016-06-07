@@ -9,7 +9,7 @@ public class GeneratorThreads {
 	
 	//Crea una instancia de un thread(segun de que tipo sea)
 	private ConcurUser agregarThread(MonitorConcurDerivative monitor, MonitorConcurDerivative otroMonitor,
-									UsersType tipo,Integer funcion,Integer[] set) {
+									UsersType tipo,Integer funcion,Integer...set) {
 		if(tipo.ordinal()==0){
 			return new SimpleUser(monitor,funcion,set);
 		}else{
@@ -20,7 +20,7 @@ public class GeneratorThreads {
 	//crea n instancias de threads de un tipo correspondiente
 	private ArrayList<ConcurUser> creacionDeThreads(UsersType tipo,
 			MonitorConcurDerivative monitor, MonitorConcurDerivative otroMonitor,
-			Integer cantThreads, Integer funcion, Integer[] set){
+			Integer cantThreads, Integer funcion, Integer...set){
 		
 		ArrayList<ConcurUser> threads = new ArrayList<ConcurUser>();
 		for(int i = 0 ; i<cantThreads ; i++)
@@ -48,7 +48,7 @@ public class GeneratorThreads {
 	public void comenzarThreads(UsersType user, MonitorConcurDerivative monitorTest, 
 												MonitorConcurDerivative otroMonitor, 
 												Integer cantThreads, Integer funcion,
-												Integer[] set) {
+												Integer...set) {
 		
 		ArrayList<ConcurUser> threads = creacionDeThreads(
 				user,monitorTest,null,5,2,set);

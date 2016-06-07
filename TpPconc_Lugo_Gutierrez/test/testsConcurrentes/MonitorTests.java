@@ -27,7 +27,7 @@ public class MonitorTests {
 	public void setConIndex() {
 		
 		generador.comenzarThreads(UsersType.SIMPLEUSER,monitorTest,null,
-												12,2,new Integer[]{3,25});
+												12,2,3,50);
 
 		System.out.println(monitorTest.getVector()[3]);
 		assertEquals(monitorTest.dimension(),20);

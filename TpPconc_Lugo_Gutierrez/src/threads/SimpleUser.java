@@ -4,7 +4,7 @@ import tpConcurrente.MonitorConcurDerivative;
 
 public class SimpleUser extends ConcurUser{
 
-	public SimpleUser(MonitorConcurDerivative monitor, Integer funcion, Integer[] set){
+	public SimpleUser(MonitorConcurDerivative monitor, Integer funcion, Integer...set){
 		super(monitor,funcion,set);
 	}
 	

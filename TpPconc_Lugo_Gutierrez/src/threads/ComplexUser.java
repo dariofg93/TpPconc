@@ -6,7 +6,7 @@ public class ComplexUser extends ConcurUser {
 	
 	private MonitorConcurDerivative repuesto;
 
-	public ComplexUser(MonitorConcurDerivative monitor, MonitorConcurDerivative otroMonitor, Integer funcion, Integer[] set) {
+	public ComplexUser(MonitorConcurDerivative monitor, MonitorConcurDerivative otroMonitor, Integer funcion, Integer...set) {
 		super(monitor,funcion,set);
 		this.repuesto = otroMonitor;
 	}

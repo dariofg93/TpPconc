@@ -11,7 +11,7 @@ public abstract class ConcurUser extends Thread{
 	protected Integer[] setCase;
 	protected ArrayList<Integer> recorrido;
 	
-	public ConcurUser(MonitorConcurDerivative monitor, Integer funcion, Integer[] set){
+	public ConcurUser(MonitorConcurDerivative monitor, Integer funcion, Integer...set){
 		this.caso = funcion;
 		this.concurDerivative = monitor;
 		this.setCase = set;
