@@ -9,22 +9,22 @@ public class GeneratorThreads {
 	
 	//Crea una instancia de un thread(segun de que tipo sea)
 	private ConcurUser agregarThread(MonitorConcurDerivative monitor, MonitorConcurDerivative otroMonitor,
-									UsersType tipo,Integer funcion,Integer...set) {
+									UsersType tipo,Integer funcion,Integer...setORget) {
 		if(tipo.ordinal()==0){
-			return new SimpleUser(monitor,funcion,set);
+			return new SimpleUser(monitor,funcion,setORget);
 		}else{
-			return new ComplexUser(monitor,otroMonitor,funcion,set);
+			return new ComplexUser(monitor,otroMonitor,funcion,setORget);
 		}
 	}
 	
 	//crea n instancias de threads de un tipo correspondiente
 	private ArrayList<ConcurUser> creacionDeThreads(UsersType tipo,
 			MonitorConcurDerivative monitor, MonitorConcurDerivative otroMonitor,
-			Integer cantThreads, Integer funcion, Integer...set){
+			Integer cantThreads, Integer funcion, Integer...setORget){
 		
 		ArrayList<ConcurUser> threads = new ArrayList<ConcurUser>();
 		for(int i = 0 ; i<cantThreads ; i++)
-			threads.add(agregarThread(monitor,otroMonitor,tipo,funcion,set));
+			threads.add(agregarThread(monitor,otroMonitor,tipo,funcion,setORget));
 		
 		return threads;
 	}
@@ -45,13 +45,13 @@ public class GeneratorThreads {
 	}
 
 	//Metodo publico para la generacion de threads desde un test
-	public void comenzarThreads(UsersType user, MonitorConcurDerivative monitorTest, 
+	public void comenzarThreads(UsersType user, MonitorConcurDerivative monitor, 
 												MonitorConcurDerivative otroMonitor, 
 												Integer cantThreads, Integer funcion,
-												Integer...set) {
+												Integer...setORget) {
 		
 		ArrayList<ConcurUser> threads = creacionDeThreads(
-				user,monitorTest,null,5,2,set);
+				user,monitor,otroMonitor,cantThreads,funcion,setORget);
 		inicializarThreads(threads);
 	}
 }

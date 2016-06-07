@@ -4,8 +4,8 @@ import tpConcurrente.MonitorConcurDerivative;
 
 public class SimpleUser extends ConcurUser{
 
-	public SimpleUser(MonitorConcurDerivative monitor, Integer funcion, Integer...set){
-		super(monitor,funcion,set);
+	public SimpleUser(MonitorConcurDerivative monitor, Integer funcion, Integer...setORget){
+		super(monitor,funcion,setORget);
 	}
 	
 	@Override
@@ -14,8 +14,13 @@ public class SimpleUser extends ConcurUser{
 		switch (caso) {
 		case 1 : System.out.println("NO CORRESPONDE LA OPERACION A UN USUARIO SIMPLE");
 				 break;
-		case 2 : concurDerivative.set(setCase[0],setCase[1]);
+				 //Dimension
+		case 2 : concurDerivative.get(setORgetCase[0]);
 				 break;
+				 //get
+		case 3 : concurDerivative.set(setORgetCase[0],setORgetCase[1]);
+				 break;
+				 //set(con index)
 		}
 	}
 
