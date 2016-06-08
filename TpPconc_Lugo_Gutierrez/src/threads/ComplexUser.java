@@ -15,7 +15,7 @@ public class ComplexUser extends ConcurUser {
 	public void run() {
 		
 		switch (caso) {
-		case 1 : System.out.println("NO CORRESPONDE LA OPERACION A UN USUARIO SIMPLE");
+		case 1 : //System.out.println("NO CORRESPONDE LA OPERACION A UN USUARIO SIMPLE");
 				 break;
 				 //Dimension
 		case 2 : this.variable = concurDerivative.get((int) setORgetCase[0]);

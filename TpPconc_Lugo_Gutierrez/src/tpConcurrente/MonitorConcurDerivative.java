@@ -1,9 +1,5 @@
 package tpConcurrente;
 
-import java.util.ArrayList;
-
-import threads.ConcurUser;
-
 public class MonitorConcurDerivative {
 
 	private Integer threadsTotal; 		//la cantidad maxima de threads a utilizar
@@ -73,7 +69,7 @@ public class MonitorConcurDerivative {
 		cantThreadsActual = 0;
 	}
 	
-	public void set(Double n) {
+	public void set(Double valor) {
 		// TODO Auto-generated method stub
 		
 	}
