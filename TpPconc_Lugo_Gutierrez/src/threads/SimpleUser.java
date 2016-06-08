@@ -21,7 +21,7 @@ public class SimpleUser extends ConcurUser{
 		case 3 : concurDerivative.set((int) setORgetCase[0],setORgetCase[1]);
 				 break;
 				 //set(con index)
-		case 4 : concurDerivative.set(setORgetCase[0]);
+		case 4 : System.out.println("Holaaaaaaaaaa");
 		 		 break;
 		 		 //set(con index)
 		}

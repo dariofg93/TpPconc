@@ -16,7 +16,7 @@ public class MonitorConcurDerivative {
 		threadsTotal = cantTotal;
 	}
 	
-	//redefinir
+	//redefinir porque no hay concurrencia(aunque no se me ocurre como aún)
 	public int dimension() {
 		return elements.length;
 	}
@@ -72,6 +72,11 @@ public class MonitorConcurDerivative {
 		}
 		cantThreadsActual = 0;
 	}
+	
+	public void set(Double n) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	public void add(MonitorConcurDerivative monitor){
 		//cantThreadsActual ++;
@@ -86,49 +91,22 @@ public class MonitorConcurDerivative {
 		return threadsTotal != cantThreadsActual;
 	}
 	
+	//Devuelve true si solo ha ingresado un solo thread
 	private Boolean hayUnSoloThread(){
 		return cantThreadsActual == 1;
 	}
 	
+	//Devuelve true si hay 0 threads "registrados"
 	private Boolean noHayNadie() {
 		return cantThreadsActual == 0;
 	}
-
-
-	/**##################   Asigna Recorrido   ##########################*/
 	
 	//Devuelve el vector del monitor(si no se usa en ningun lado se borrará)
 	public double[] getVector() {
 		return elements;
 	}
 
-	//Prop: Asigno un recorrido a un thread con un size correspondiente a
-	// la cantidad de elementos que debe recorrer. Devuelve el 
-	// recorrido sobrante
-	public ArrayList<Integer> asignarRecorrido(ConcurUser user, ArrayList<Integer> rec, Integer threadsFaltantes) {
-		ArrayList<Integer> recCortado = rec;
-		Integer i = (elements.length / threadsTotal) + 
-					(rec.size() % threadsFaltantes);
-		while(i>0){
-			user.añadirAlRecorrido(recCortado.get(0));
-			recCortado.remove(0);
-			i--;
-		}
-		return recCortado;
-	}
-	
-	//Devuelve una lista desde 0 hasta el size-1 del vector del monitor
-	public ArrayList<Integer> numerosHastaSize(){
-		
-		ArrayList<Integer> list = new ArrayList<Integer>();
-		
-		for(int i = 0 ; i < elements.length; i++)
-			list.add(i);
-		return list;
-	}
-
-	public void set(Double n) {
-		// TODO Auto-generated method stub
-		
+	public Integer limiteDeThreads() {
+		return threadsTotal;
 	}
 }

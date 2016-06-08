@@ -12,9 +12,8 @@ public class GeneratorThreads {
 									UsersType tipo,Integer funcion,double...setORget) {
 		if(tipo.ordinal()==0){
 			return new SimpleUser(monitor,funcion,setORget);
-		}else{
-			return new ComplexUser(monitor,otroMonitor,funcion,setORget);
 		}
+		return new ComplexUser(monitor,otroMonitor,funcion,setORget);
 	}
 	
 	//crea n instancias de threads de un tipo correspondiente
@@ -35,16 +34,44 @@ public class GeneratorThreads {
 
 		Integer threadsFaltantes = users.size();
 		ArrayList<Integer> indexOfVector;
-		indexOfVector = monitor.numerosHastaSize();
+		indexOfVector = numerosHastaSize(monitor);
 		ArrayList<ConcurUser> threads = new ArrayList<ConcurUser>();
 	
 		for(ConcurUser t: users){
-			indexOfVector = monitor.asignarRecorrido(t, indexOfVector, threadsFaltantes);
+			indexOfVector = asignarRecorrido(t, indexOfVector, threadsFaltantes,monitor);
 			threadsFaltantes--;
 			t.start();
 			threads.add(t);
 		}
 		return threads;
+	}
+	
+/**##################   Asigna Recorrido   ##########################*/
+
+	//Prop: Asigno un recorrido a un thread con un size correspondiente a
+	// la cantidad de elementos que debe recorrer. Devuelve el 
+	// recorrido sobrante
+	public ArrayList<Integer> asignarRecorrido(ConcurUser user, ArrayList<Integer> rec,
+												Integer threadsFaltantes,MonitorConcurDerivative monitor) {
+		ArrayList<Integer> recCortado = rec;
+		Integer i = (monitor.getVector().length / monitor.limiteDeThreads()) + 
+					(rec.size() % threadsFaltantes);
+		while(i>0){
+			user.añadirAlRecorrido(recCortado.get(0));
+			recCortado.remove(0);
+			i--;
+		}
+		return recCortado;
+	}
+	
+	//Devuelve una lista desde 0 hasta el size-1 del vector del monitor
+	public ArrayList<Integer> numerosHastaSize(MonitorConcurDerivative monitor){
+		
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		
+		for(int i = 0 ; i < monitor.getVector().length; i++)
+			list.add(i);
+		return list;
 	}
 
 	//Metodo publico para la generacion de threads desde un test
