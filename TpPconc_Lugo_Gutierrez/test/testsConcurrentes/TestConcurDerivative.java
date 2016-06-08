@@ -161,20 +161,22 @@ public class TestConcurDerivative {
 		
 		derivative.assign(derivative2);
 		
+		ConcurDerivative derivativeInicial = derivative2;
+		
 		for(int i = 0; i<10; i++){
 			derivative.set(i,(double)Math.pow(derivative.get(i), 2));	
 		}
 				
-		derivative.differentiate();
+		ConcurDerivative derivativeRes = derivative.differentiate();
 				
-		assertEquals(derivative.get(0),4,0);
-		assertEquals(derivative.get(1),6,0);
-		assertEquals(derivative.get(2),8,0);
-		assertEquals(derivative.get(3),10,0);
-		assertEquals(derivative.get(4),12,0);
-		assertEquals(derivative.get(5),14,0);
-		assertEquals(derivative.get(6),16,0);
-		assertEquals(derivative.get(7),18,0);
+		assertEquals(derivativeRes.get(0),2*(derivativeInicial.get(1)),0.01);
+		assertEquals(derivativeRes.get(1),2*(derivativeInicial.get(2)),0.01);
+		assertEquals(derivativeRes.get(2),2*(derivativeInicial.get(3)),0.01);
+		assertEquals(derivativeRes.get(3),2*(derivativeInicial.get(4)),0.01);
+		assertEquals(derivativeRes.get(4),2*(derivativeInicial.get(5)),0.01);
+		assertEquals(derivativeRes.get(5),2*(derivativeInicial.get(6)),0.01);
+		assertEquals(derivativeRes.get(6),2*(derivativeInicial.get(7)),0.01);
+		assertEquals(derivativeRes.get(7),2*(derivativeInicial.get(8)),0.01);
 		
 	}
 }
