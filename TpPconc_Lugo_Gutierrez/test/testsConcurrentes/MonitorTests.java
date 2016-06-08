@@ -19,40 +19,41 @@ public class MonitorTests {
 	
 	@Before
 	public void setUp(){
-		monitorTest = new MonitorConcurDerivative(20, 4);
+		monitorTest = new MonitorConcurDerivative(5, 4);
 		generador = new GeneratorThreads();
 	}
 	
 	@Test
 	public void testGet() {
 		generador.comenzarThreads(UsersType.SIMPLEUSER,monitorTest,null,
-				4,3,15,42);
+				4,3,2,42);
 		ArrayList<ConcurUser> threads = 
-		generador.comenzarThreads(UsersType.SIMPLEUSER,monitorTest,null,4,2,15);
+		generador.comenzarThreads(UsersType.SIMPLEUSER,monitorTest,null,4,2,2);
 		
 		for(ConcurUser t: threads)
 			System.out.println(t.getVariable());
 		
-		assertEquals(monitorTest.dimension(),20);
+		assertEquals(monitorTest.dimension(),5);
 	}
 	
 	@Test
 	public void testSetConIndex() {
 		
 		generador.comenzarThreads(UsersType.SIMPLEUSER,monitorTest,null,
-												4,3,5,50);
+												4,3,4,50);
 
-		System.out.println(monitorTest.getVector()[5]);
-		assertEquals(monitorTest.dimension(),20);
+		System.out.println("+"+monitorTest.getVector()[4]+"+");
+		assertEquals(monitorTest.dimension(),5);
 	}
 	
 	@Test
 	public void testSet() {
 		
 		generador.comenzarThreads(UsersType.SIMPLEUSER,monitorTest,null,
-												4,4,5,50);
+												4,4,12);
 
-		
-		assertEquals(monitorTest.dimension(),20);
+		for(double d : monitorTest.getVector())
+			System.out.print(" "+d+"a");
+		assertEquals(monitorTest.dimension(),5);
 	}
 }
