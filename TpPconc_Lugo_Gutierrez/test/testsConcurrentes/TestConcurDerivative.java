@@ -166,7 +166,7 @@ public class TestConcurDerivative {
 		for(int i = 0; i<10; i++){
 			derivative.set(i,(double)Math.pow(derivative.get(i), 2));	
 		}
-				
+				 
 		ConcurDerivative derivativeRes = derivative.differentiate();
 				
 		assertEquals(derivativeRes.get(0),2*(derivativeInicial.get(1)),0.01);

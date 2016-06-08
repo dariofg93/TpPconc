@@ -95,7 +95,7 @@ public class ConcurDerivative {
 		for (int i = 0; i < dimension(); ++i)
 			set(i, get(i) / v.get(i));
 	}
-	
+	 
 	
 	/** Computes the derivative of the function represented by this vector,
 	 *  using the finite differences method.
