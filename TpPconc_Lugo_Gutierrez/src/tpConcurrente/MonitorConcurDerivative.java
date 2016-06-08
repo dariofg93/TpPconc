@@ -23,52 +23,56 @@ public class MonitorConcurDerivative {
 	
 	public synchronized Double get(int lugar) {
 		
-		//Double retorno = null;
-		cantThreadsActual ++;
-		
-		if(cantThreadsActual<2){
-			//retorno = elements[lugar];
+		cantThreadsActual++;
+				
+		if(hayUnSoloThread()){
 			
 			while(hayEspacio()){
-				try {
-					this.wait();
+				try { this.wait(); 
 				} catch (InterruptedException e) {}
 			}
-			this.cantThreadsActual = 0;
 			this.notifyAll();
+			cantThreadsActual = 0;
 			return elements[lugar];
-		} else{
+		}
+		else{
 			try {
-				this.wait();
+				while(!noHayNadie()){
+					this.notify();
+					this.wait();
+				}
+				
 			} catch (InterruptedException e) {}
-			return null;
+			return 0.0;
 		}
 		
-	}
+}
 
 	//creo que ya esta bien.. lastima que los try lo deja tan feo al codigo...
 	public synchronized void set(int lugar,double valor){
 		
 		cantThreadsActual ++;
 		
-		if(cantThreadsActual>1){
+		if(hayUnSoloThread()){
 			elements[lugar] = valor;
 			
 			while(hayEspacio()){
-				try {
-					this.wait();
+				try { this.wait();
 				} catch (InterruptedException e) {}
 			}
 			this.notifyAll();
-			this.cantThreadsActual = 0;
 		}
 		else{
 			try {
-				this.wait();
+				while(!noHayNadie()){
+					this.notify();
+					this.wait();
+				}
 			} catch (InterruptedException e) {}
 		}
+		cantThreadsActual = 0;
 	}
-	
+
 	public void add(MonitorConcurDerivative monitor){
 		//cantThreadsActual ++;
 		//if(this.noEstaOcupado){
@@ -78,12 +82,16 @@ public class MonitorConcurDerivative {
 	}
 	
 	//Devuelve true si aun no han ingresado todos los threads
-	public Boolean hayEspacio(){
+	private Boolean hayEspacio(){
 		return threadsTotal != cantThreadsActual;
 	}
 	
-	public Boolean hayUnSoloThread(){
+	private Boolean hayUnSoloThread(){
 		return cantThreadsActual == 1;
+	}
+	
+	private Boolean noHayNadie() {
+		return cantThreadsActual == 0;
 	}
 
 

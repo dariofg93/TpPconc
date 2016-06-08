@@ -19,21 +19,20 @@ public class MonitorTests {
 	
 	@Before
 	public void setUp(){
-		monitorTest = new MonitorConcurDerivative(20, 12);
+		monitorTest = new MonitorConcurDerivative(20, 10);
 		generador = new GeneratorThreads();
 	}
 	
 	@Test
 	public void testGet() {
 		generador.comenzarThreads(UsersType.SIMPLEUSER,monitorTest,null,
-				12,3,3,50);
-		Object value =33;
+				10,3,15,42);
 		ArrayList<ConcurUser> threads = 
-		generador.comenzarThreads(UsersType.SIMPLEUSER,monitorTest,null,12,2,3);
+		generador.comenzarThreads(UsersType.SIMPLEUSER,monitorTest,null,10,2,15);
 		
-		for(ConcurUser t: threads){
+		for(ConcurUser t: threads)
 			System.out.println(t.getVariable());
-		}
+		
 		assertEquals(monitorTest.dimension(),20);
 	}
 	
@@ -41,9 +40,9 @@ public class MonitorTests {
 	public void setConIndex() {
 		
 		generador.comenzarThreads(UsersType.SIMPLEUSER,monitorTest,null,
-												12,3,3,50);
+												10,3,5,50);
 
-		System.out.println(monitorTest.getVector()[3]);
+		System.out.println(monitorTest.getVector()[5]);
 		assertEquals(monitorTest.dimension(),20);
 	}
 	
