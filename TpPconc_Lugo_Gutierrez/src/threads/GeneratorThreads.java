@@ -51,7 +51,7 @@ public class GeneratorThreads {
 	//Prop: Asigno un recorrido a un thread con un size correspondiente a
 	// la cantidad de elementos que debe recorrer. Devuelve el 
 	// recorrido sobrante
-	public ArrayList<Integer> asignarRecorrido(ConcurUser user, ArrayList<Integer> rec,
+	private ArrayList<Integer> asignarRecorrido(ConcurUser user, ArrayList<Integer> rec,
 												Integer threadsFaltantes,MonitorConcurDerivative monitor) {
 		ArrayList<Integer> recCortado = rec;
 		Integer i = (monitor.getVector().length / monitor.limiteDeThreads()) + 
@@ -65,7 +65,7 @@ public class GeneratorThreads {
 	}
 	
 	//Devuelve una lista desde 0 hasta el size-1 del vector del monitor
-	public ArrayList<Integer> numerosHastaSize(MonitorConcurDerivative monitor){
+	private ArrayList<Integer> numerosHastaSize(MonitorConcurDerivative monitor){
 		
 		ArrayList<Integer> list = new ArrayList<Integer>();
 		
