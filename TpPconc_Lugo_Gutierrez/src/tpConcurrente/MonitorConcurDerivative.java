@@ -126,4 +126,9 @@ public class MonitorConcurDerivative {
 			list.add(i);
 		return list;
 	}
+
+	public void set(Double n) {
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -8,11 +8,11 @@ public abstract class ConcurUser extends Thread{
 
 	protected MonitorConcurDerivative concurDerivative;
 	protected Integer caso;
-	protected Integer[] setORgetCase;
+	protected double[] setORgetCase;
 	protected ArrayList<Integer> recorrido;
 	protected Object variable;
 	
-	public ConcurUser(MonitorConcurDerivative monitor, Integer funcion, Integer...setORget){
+	public ConcurUser(MonitorConcurDerivative monitor, Integer funcion, double...setORget){
 		this.caso = funcion;
 		this.concurDerivative = monitor;
 		this.setORgetCase = setORget;

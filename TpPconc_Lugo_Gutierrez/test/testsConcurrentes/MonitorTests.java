@@ -37,10 +37,20 @@ public class MonitorTests {
 	}
 	
 	@Test
-	public void setConIndex() {
+	public void testSetConIndex() {
 		
 		generador.comenzarThreads(UsersType.SIMPLEUSER,monitorTest,null,
 												10,3,5,50);
+
+		System.out.println(monitorTest.getVector()[5]);
+		assertEquals(monitorTest.dimension(),20);
+	}
+	
+	@Test
+	public void testSet() {
+		
+		generador.comenzarThreads(UsersType.SIMPLEUSER,monitorTest,null,
+												10,4,5,50);
 
 		System.out.println(monitorTest.getVector()[5]);
 		assertEquals(monitorTest.dimension(),20);
