@@ -31,27 +31,29 @@ public class GeneratorThreads {
 
 	//Dada una lista de threads, le da los valores necesarios finales(si
 	// es necesario) y los inicializa
-	private void inicializarThreads(ArrayList<ConcurUser> users,MonitorConcurDerivative monitor){
+	private ArrayList<ConcurUser> inicializarThreads(ArrayList<ConcurUser> users,MonitorConcurDerivative monitor){
 
 		Integer threadsFaltantes = users.size();
 		ArrayList<Integer> indexOfVector;
 		indexOfVector = monitor.numerosHastaSize();
+		ArrayList<ConcurUser> threads = new ArrayList<ConcurUser>();
 	
 		for(ConcurUser t: users){
 			indexOfVector = monitor.asignarRecorrido(t, indexOfVector, threadsFaltantes);
 			threadsFaltantes--;
 			t.start();
+			threads.add(t);
 		}
+		return threads;
 	}
 
 	//Metodo publico para la generacion de threads desde un test
-	public void comenzarThreads(UsersType user, MonitorConcurDerivative monitor, 
-												MonitorConcurDerivative otroMonitor, 
-												Integer cantThreads, Integer funcion,
-												Integer...setORget) {
-		
+	public ArrayList<ConcurUser> comenzarThreads(UsersType user, MonitorConcurDerivative monitor, 
+															MonitorConcurDerivative otroMonitor, 
+															Integer cantThreads, Integer funcion,
+															Integer...setORget) {
 		ArrayList<ConcurUser> threads = creacionDeThreads(
 				user,monitor,otroMonitor,cantThreads,funcion,setORget);
-		inicializarThreads(threads,monitor);
+		return inicializarThreads(threads,monitor);
 	}
 }

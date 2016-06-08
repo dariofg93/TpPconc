@@ -10,12 +10,14 @@ public abstract class ConcurUser extends Thread{
 	protected Integer caso;
 	protected Integer[] setORgetCase;
 	protected ArrayList<Integer> recorrido;
+	protected Object variable;
 	
 	public ConcurUser(MonitorConcurDerivative monitor, Integer funcion, Integer...setORget){
 		this.caso = funcion;
 		this.concurDerivative = monitor;
 		this.setORgetCase = setORget;
 		this.recorrido = new ArrayList<Integer>();
+		this.variable = null;
 	}
 	
 	public void añadirAlRecorrido(Integer n) {
@@ -23,4 +25,8 @@ public abstract class ConcurUser extends Thread{
 	}
 	
 	public abstract Integer IdUser();
+
+	public Object getVariable() {
+		return variable;
+	}
 }

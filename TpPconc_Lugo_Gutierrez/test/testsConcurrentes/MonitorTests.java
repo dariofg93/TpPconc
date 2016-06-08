@@ -24,6 +24,20 @@ public class MonitorTests {
 	}
 	
 	@Test
+	public void testGet() {
+		generador.comenzarThreads(UsersType.SIMPLEUSER,monitorTest,null,
+				12,3,3,50);
+		Object value =33;
+		ArrayList<ConcurUser> threads = 
+		generador.comenzarThreads(UsersType.SIMPLEUSER,monitorTest,null,12,2,3);
+		
+		for(ConcurUser t: threads){
+			System.out.println(t.getVariable());
+		}
+		assertEquals(monitorTest.dimension(),20);
+	}
+	
+	@Test
 	public void setConIndex() {
 		
 		generador.comenzarThreads(UsersType.SIMPLEUSER,monitorTest,null,

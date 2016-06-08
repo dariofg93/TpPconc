@@ -21,30 +21,31 @@ public class MonitorConcurDerivative {
 		return elements.length;
 	}
 	
-	public double get(int lugar) {
+	public synchronized Double get(int lugar) {
 		
-		/**double retorno;
+		//Double retorno = null;
 		cantThreadsActual ++;
 		
-		if(cantThreadsActual>1){
-			retorno = elements[lugar];
+		if(cantThreadsActual<2){
+			//retorno = elements[lugar];
 			
 			while(hayEspacio()){
 				try {
 					this.wait();
 				} catch (InterruptedException e) {}
 			}
-			this.notifyAll();
 			this.cantThreadsActual = 0;
-			*/return 1;/*
-		}
-		else{
+			this.notifyAll();
+			return elements[lugar];
+		} else{
 			try {
 				this.wait();
 			} catch (InterruptedException e) {}
-		}*/
+			return null;
+		}
+		
 	}
-	
+
 	//creo que ya esta bien.. lastima que los try lo deja tan feo al codigo...
 	public synchronized void set(int lugar,double valor){
 		
@@ -80,6 +81,11 @@ public class MonitorConcurDerivative {
 	public Boolean hayEspacio(){
 		return threadsTotal != cantThreadsActual;
 	}
+	
+	public Boolean hayUnSoloThread(){
+		return cantThreadsActual == 1;
+	}
+
 
 	/**##################   Asigna Recorrido   ##########################*/
 	
