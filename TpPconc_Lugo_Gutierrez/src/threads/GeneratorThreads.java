@@ -28,8 +28,7 @@ public class GeneratorThreads {
 		return threads;
 	}
 
-	//Dada una lista de threads, le da los valores necesarios finales(si
-	// es necesario) y los inicializa
+	//Dada una lista de threads, le da los valores necesarios finales y los inicializa
 	private ArrayList<ConcurUser> inicializarThreads(ArrayList<ConcurUser> users,MonitorConcurDerivative monitor){
 
 		Integer threadsFaltantes = users.size();
@@ -40,13 +39,12 @@ public class GeneratorThreads {
 		for(ConcurUser t: users){
 			indexOfVector = asignarRecorrido(t, indexOfVector, threadsFaltantes,monitor);
 			threadsFaltantes--;
-			t.start();
 			threads.add(t);
+			t.start();
+			
 		}
 		return threads;
 	}
-	
-/**##################   Asigna Recorrido   ##########################*/
 
 	//Prop: Asigno un recorrido a un thread con un size correspondiente a
 	// la cantidad de elementos que debe recorrer. Devuelve el 

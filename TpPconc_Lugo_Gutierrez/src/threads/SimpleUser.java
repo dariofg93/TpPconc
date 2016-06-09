@@ -16,7 +16,7 @@ public class SimpleUser extends ConcurUser{
 				 break;
 				 //Dimension
 		case 2 : this.variable = concurDerivative.get((int) setORgetCase[0]);
-				 break;
+				 break;	//No entiendo porque no cambia el valor de la variable
 				 //get
 		case 3 : concurDerivative.set((int) setORgetCase[0],setORgetCase[1]);
 				 break;
