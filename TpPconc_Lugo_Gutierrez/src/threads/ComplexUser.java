@@ -1,12 +1,13 @@
 package threads;
 
+import tpConcurrente.Funciones.TipoDeFuncion;
 import tpConcurrente.MonitorConcurDerivative;
 
 public class ComplexUser extends ConcurUser {
 	
 	private MonitorConcurDerivative repuesto;
 
-	public ComplexUser(MonitorConcurDerivative monitor, MonitorConcurDerivative otroMonitor, Integer funcion, double...setORget) {
+	public ComplexUser(MonitorConcurDerivative monitor, MonitorConcurDerivative otroMonitor, TipoDeFuncion funcion, double...setORget) {
 		super(monitor,funcion,setORget);
 		this.repuesto = otroMonitor;
 	}
@@ -15,18 +16,19 @@ public class ComplexUser extends ConcurUser {
 	public void run() {
 		
 		switch (caso) {
-		case 1 : //System.out.println("NO CORRESPONDE LA OPERACION A UN USUARIO SIMPLE");
+		case DIMENSION : concurDerivative.dimension();
 				 break;
 				 //Dimension
-		case 2 : this.variable = concurDerivative.get((int) setORgetCase[0]);
+		case GET : concurDerivative.get((int) setORgetCase[0]);
 				 break;
 				 //get
-		case 3 : concurDerivative.set((int) setORgetCase[0],setORgetCase[1]);
+		case SETCONINDEX : concurDerivative.set((int) setORgetCase[0],setORgetCase[1]);
 				 break;
 				 //set(con index)
-		case 4 : concurDerivative.set(setORgetCase[0]);
+		case SET : for(Integer i : recorrido)
+				 	concurDerivative.set(i,setORgetCase[0]);
 		 		 break;
-		 		 //set(con index)
+		 		 //set
 		}
 	}
 	
