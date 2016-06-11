@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import threads.ConcurUser;
 import recursos.Barrier;
 import recursos.GeneratorThreads;
+import recursos.Task;
 
 public class MonitorConcurDerivative {
 
@@ -24,11 +25,10 @@ public class MonitorConcurDerivative {
 		return elements.length;
 	}
 	
-	public synchronized Double get(int lugar) {
+	public Double get(int lugar) {
 		return elements[lugar];	
 	}
 
-	//creo que ya esta bien.. lastima que los try lo deja tan feo al codigo...
 	public void set(int lugar,double valor){
 		elements[lugar] = valor;
 	}
@@ -45,9 +45,14 @@ public class MonitorConcurDerivative {
 	public double[] getVector() {
 		return elements;
 	}
-
-	public Integer limiteDeThreads() {
+	
+	public Integer limiteDeThreads(){
 		return threadsTotal;
+	}
+
+	private void distributte(Task tarea){
+		for(ConcurUser w : workers)
+			w.agregarTarea(tarea);
 	}
 		
 	public void imprimirVector(){

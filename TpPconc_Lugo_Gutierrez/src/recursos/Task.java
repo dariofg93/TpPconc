@@ -8,6 +8,10 @@ public class Task {
 	private Object primario;
 	private Object segundario;
 	
+	public Task(TipoDeFuncion f){
+		this.funcion = f;
+	}
+	
 	public Task(TipoDeFuncion f, Object p){
 		this.funcion = f;
 		this.primario = p;
