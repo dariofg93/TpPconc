@@ -1,8 +1,9 @@
-package threads;
+package recursos;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import threads.ConcurUser;
 import tpConcurrente.MonitorConcurDerivative;
 
 public class GeneratorThreads {

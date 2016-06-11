@@ -1,18 +1,20 @@
 package tpConcurrente;
 
+import java.util.ArrayList;
+
+import threads.ConcurUser;
 import threads.GeneratorThreads;
-import tpConcurrente.Funciones.TipoDeFuncion;
 
 public class MonitorConcurDerivative {
 
 	private Integer threadsTotal; 		//la cantidad maxima de threads a utilizar
 	private double[] elements;			//el vector que se recorre de ser necesario
-	private GeneratorThreads generador; //es el encargado de generar los threads
+	private ArrayList<ConcurUser> workers;
 	
 	public MonitorConcurDerivative(int size, Integer cantTotal) {
 		elements = new double[size];
 		threadsTotal = cantTotal;
-		generador = new GeneratorThreads();
+		workers = (new GeneratorThreads()).comenzarThreads(this);
 	}
 	
 	public int dimension() {
@@ -29,7 +31,7 @@ public class MonitorConcurDerivative {
 	}
 	
 	public void set(int i) {
-		generador.comenzarThreads(this, null, threadsTotal,TipoDeFuncion.SET,i);
+		
 	}
 
 	public void add(MonitorConcurDerivative monitor){

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import tpConcurrente.Funciones.TipoDeFuncion;
+import recursos.Funciones.TipoDeFuncion;
 import tpConcurrente.MonitorConcurDerivative;
 
 public class ConcurUser extends Thread{
@@ -27,7 +27,7 @@ public class ConcurUser extends Thread{
 				 break;
 		case GET 		 : 	monitor.get((int) setORgetCase[0]);
 				 			break;
-		case SETCONINDEX : monitor.set((int) setORgetCase[0],setORgetCase[1]);
+		case SETCONINDEX :  monitor.set((int) setORgetCase[0],setORgetCase[1]);
 				 break;
 		case SET 		 : 	for(Integer i : recorrido)
 				 				monitor.set(i,setORgetCase[0]);

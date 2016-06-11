@@ -1,4 +1,4 @@
-package tpConcurrente;
+package recursos;
 
 public class Funciones {
 	
