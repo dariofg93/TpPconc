@@ -3,7 +3,6 @@ package tpConcurrente;
 import java.util.ArrayList;
 
 import threads.ConcurUser;
-import recursos.Barrier;
 import recursos.GeneratorThreads;
 import recursos.Task;
 import recursos.Functions.TipoDeFuncion;
@@ -13,13 +12,13 @@ public class MonitorConcurDerivative {
 	private Integer threadsTotal; 		
 	private double[] elements;			
 	private ArrayList<ConcurUser> workers;
-	private Barrier barrera;
 	
 	public MonitorConcurDerivative(int size, Integer cantTotal) {
 		elements = new double[size];
 		threadsTotal = cantTotal;
 		workers = (new GeneratorThreads()).comenzarThreads(this);
-		barrera = new Barrier(size-1);
+		for(ConcurUser w : workers)
+			w.start();
 	}
 	
 	public int dimension() {
@@ -34,9 +33,10 @@ public class MonitorConcurDerivative {
 		elements[i] = d;
 	}
 	
-	public void set(double d) {
+	public synchronized void set(double d) {
 		distributte(new Task(TipoDeFuncion.SET,d));
-		barrera.ready();
+		for(int i = 0; i<threadsTotal; i++)
+			this.notify();
 	}
 	
 	//Devuelve el vector del monitor
@@ -56,5 +56,10 @@ public class MonitorConcurDerivative {
 	public void imprimirVector(){
 		for(double e : elements)
 			System.out.print(" "+e+" |||");
+	}
+	
+	public void imprimirRecorridos(){
+		for(ConcurUser w: workers)
+			w.imprimirRecorrido();
 	}
 }

@@ -26,34 +26,36 @@ public class ConcurUser extends Thread{
 	public void run() {
 		
 		while(true){
-			Task t = q.poll();
-			switch(t.getFuncion()){
-			
-				case SET 		  : for(Integer i : recorrido)
-				 						monitor.set(i,(double)t.getPrimario());
-		 		 					break;
-				case ASSIGN 	  : for(Integer i : recorrido)
-										monitor.set(i,(int)t.getPrimario());
-									break;
-				case ABS 		  : for(Integer i : recorrido)
-										monitor.set(i,(int)t.getPrimario());
-									break;
-				case ADD 		  : for(Integer i : recorrido)
-										monitor.set(i,(int)t.getPrimario());
-									break;
-				case SUB 		  : for(Integer i : recorrido)
-										monitor.set(i,(int)t.getPrimario());
-									break;
-				case MUL 		  : for(Integer i : recorrido)
-										monitor.set(i,(int)t.getPrimario());
-									break;
-				case DIV 		  : for(Integer i : recorrido)
-										monitor.set(i,(int)t.getPrimario());
-									break;
-				case DIFFERENTIATE: for(Integer i : recorrido)
-										monitor.set(i,(int)t.getPrimario());
-									break;
-			} 			
+			if(!q.isEmpty()){
+				Task t = q.poll();
+				switch(t.getFuncion()){
+				
+					case SET 		  : for(Integer i : recorrido)
+					 						monitor.set(i,(double)t.getPrimario());
+			 		 					break;
+					case ASSIGN 	  : for(Integer i : recorrido)
+											monitor.set(i,(int)t.getPrimario());
+										break;
+					case ABS 		  : for(Integer i : recorrido)
+											monitor.set(i,(int)t.getPrimario());
+										break;
+					case ADD 		  : for(Integer i : recorrido)
+											monitor.set(i,(int)t.getPrimario());
+										break;
+					case SUB 		  : for(Integer i : recorrido)
+											monitor.set(i,(int)t.getPrimario());
+										break;
+					case MUL 		  : for(Integer i : recorrido)
+											monitor.set(i,(int)t.getPrimario());
+										break;
+					case DIV 		  : for(Integer i : recorrido)
+											monitor.set(i,(int)t.getPrimario());
+										break;
+					case DIFFERENTIATE: for(Integer i : recorrido)
+											monitor.set(i,(int)t.getPrimario());
+										break;
+				}
+			}
 			barrera.ready();
 		}
 	}
@@ -64,5 +66,11 @@ public class ConcurUser extends Thread{
 
 	public void agregarTarea(Task tarea) {
 		q.add(tarea);
+	}
+	
+	public void imprimirRecorrido(){
+		for(Integer n: recorrido)
+			System.out.println(n+",");
+		System.out.println("|||");
 	}
 }

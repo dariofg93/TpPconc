@@ -45,6 +45,7 @@ public class MonitorTests {
 		
 		derivative.set(5);
 		derivative.imprimirVector();
+		derivative.imprimirRecorridos();
 		//for(int i = 0; i<10; i++){
 		//	assertTrue((Double)derivative.get(i)==5.0);
 		//}
