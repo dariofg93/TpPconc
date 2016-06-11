@@ -9,9 +9,7 @@ import threads.*;
 import tpConcurrente.MonitorConcurDerivative;
 
 public class MonitorTests {
-	
-	public enum UsersType{SIMPLEUSER , COMPLEXUSER}
-	
+		
 	MonitorConcurDerivative monitorTest;
 	GeneratorThreads generador;
 	
@@ -23,16 +21,16 @@ public class MonitorTests {
 	
 	@Test
 	public void testSetConIndex() {
-
-		monitorTest.set(5);
-		assertTrue(monitorTest.get(9)==5);
+		
+		monitorTest.set(5,9);
+		assertTrue(monitorTest.get(5)==9);
 	}
 	
 	@Test
 	public void testSet() {
 
-		for(double d : monitorTest.getVector())
-			System.out.print(" "+d+" |||");
+		monitorTest.set(6);
+		monitorTest.imprimirVector();
 		assertEquals(monitorTest.dimension(),10);
 	}
 }

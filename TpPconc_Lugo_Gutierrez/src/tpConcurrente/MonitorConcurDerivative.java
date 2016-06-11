@@ -1,6 +1,5 @@
 package tpConcurrente;
 
-import testsConcurrentes.MonitorTests.UsersType;
 import threads.GeneratorThreads;
 import tpConcurrente.Funciones.TipoDeFuncion;
 
@@ -8,7 +7,7 @@ public class MonitorConcurDerivative {
 
 	private Integer threadsTotal; 		//la cantidad maxima de threads a utilizar
 	private double[] elements;			//el vector que se recorre de ser necesario
-	private GeneratorThreads generador; 
+	private GeneratorThreads generador; //es el encargado de generar los threads
 	
 	public MonitorConcurDerivative(int size, Integer cantTotal) {
 		elements = new double[size];
@@ -30,7 +29,7 @@ public class MonitorConcurDerivative {
 	}
 	
 	public void set(int i) {
-		generador.comenzarThreads(UsersType.SIMPLEUSER, this, null, threadsTotal,TipoDeFuncion.SET,i);
+		generador.comenzarThreads(this, null, threadsTotal,TipoDeFuncion.SET,i);
 	}
 
 	public void add(MonitorConcurDerivative monitor){
@@ -44,5 +43,10 @@ public class MonitorConcurDerivative {
 
 	public Integer limiteDeThreads() {
 		return threadsTotal;
+	}
+		
+	public void imprimirVector(){
+		for(double e : elements)
+			System.out.print(" "+e+" |||");
 	}
 }

@@ -3,31 +3,29 @@ package threads;
 import java.util.ArrayList;
 import java.util.List;
 
-import testsConcurrentes.MonitorTests.UsersType;
-import tpConcurrente.Funciones.TipoDeFuncion;
 import tpConcurrente.MonitorConcurDerivative;
 
 public class GeneratorThreads {
 	
-	//Crea una instancia de un thread(segun de que tipo sea)
-	private ConcurUser agregarThread(MonitorConcurDerivative monitor, MonitorConcurDerivative otroMonitor,
-									UsersType tipo,TipoDeFuncion funcion,double...setORget) {
-		if(tipo.ordinal()==0){
-			return new SimpleUser(monitor,funcion,setORget);
-		}
-		return new ComplexUser(monitor,otroMonitor,funcion,setORget);
-	}
-	
 	//crea n instancias de threads de un tipo correspondiente
-	private ArrayList<ConcurUser> creacionDeThreads(UsersType tipo,
-			MonitorConcurDerivative monitor, MonitorConcurDerivative otroMonitor,
-			Integer cantThreads, TipoDeFuncion funcion, double...setORget){
+	private ArrayList<ConcurUser> creacionDeThreads(MonitorConcurDerivative monitor){
 		
 		ArrayList<ConcurUser> threads = new ArrayList<ConcurUser>();
-		for(int i = 0 ; i<cantThreads ; i++)
-			threads.add(agregarThread(monitor,otroMonitor,tipo,funcion,setORget));
+		for(int i = 0 ; i<monitor.limiteDeThreads(); i++)
+			threads.add(new ConcurUser(monitor));
 		
 		return threads;
+	}
+	
+	private List<Integer> indexSobrantes(int vectorSize, int cantThreads, MonitorConcurDerivative monitor) {
+		
+		
+		if((vectorSize % cantThreads)==0){
+		return numerosHastaSize(monitor).subList((
+					vectorSize-(vectorSize % cantThreads)), vectorSize);
+		}
+		return numerosHastaSize(monitor).subList((
+				vectorSize-(vectorSize % cantThreads)+1), vectorSize);
 	}
 
 	//Dada una lista de threads, le da los valores necesarios finales y los inicializa
@@ -36,9 +34,8 @@ public class GeneratorThreads {
 		ArrayList<Integer> indexOfVector;
 		indexOfVector = numerosHastaSize(monitor);
 		ArrayList<ConcurUser> threads = new ArrayList<ConcurUser>();
-		List<Integer> restantes = numerosHastaSize(monitor).subList((monitor.getVector().length) - 
-																		((monitor.getVector().length % users.size())+1)
-																		, monitor.getVector().length);
+		List<Integer> restantes = indexSobrantes(monitor.getVector().length,
+												 users.size(),monitor);
 	
 		for(ConcurUser t: users){
 			indexOfVector = asignarRecorrido(t, indexOfVector,monitor);
@@ -47,7 +44,6 @@ public class GeneratorThreads {
 			    restantes.remove(0);
 			}
 			threads.add(t);
-			t.start();
 		}
 		return threads;
 	}
@@ -58,8 +54,8 @@ public class GeneratorThreads {
 	private ArrayList<Integer> asignarRecorrido(ConcurUser user, ArrayList<Integer> rec,
 											MonitorConcurDerivative monitor) {
 		ArrayList<Integer> recCortado = rec;
-		Integer i = (monitor.getVector().length / monitor.limiteDeThreads());// + 
-		//			(rec.size() % threadsFaltantes);
+		Integer i = monitor.getVector().length / monitor.limiteDeThreads();
+		
 		while(i>0){
 			user.añadirAlRecorrido(recCortado.get(0));
 			recCortado.remove(0);
@@ -79,12 +75,9 @@ public class GeneratorThreads {
 	}
 
 	//Metodo publico para la generacion de threads desde un test
-	public ArrayList<ConcurUser> comenzarThreads(UsersType user, MonitorConcurDerivative monitor, 
-															MonitorConcurDerivative otroMonitor, 
-															Integer cantThreads, TipoDeFuncion funcion,
-															double...setORget) {
-		ArrayList<ConcurUser> threads = creacionDeThreads(
-				user,monitor,otroMonitor,cantThreads,funcion,setORget);
+	public ArrayList<ConcurUser> comenzarThreads(MonitorConcurDerivative monitor)
+	{
+		ArrayList<ConcurUser> threads = creacionDeThreads(monitor);
 		return inicializarThreads(threads,monitor);
 	}
 }
