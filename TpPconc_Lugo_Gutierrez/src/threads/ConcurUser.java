@@ -30,7 +30,7 @@ public class ConcurUser extends Thread{
 			switch(t.getFuncion()){
 			
 				case SET 		  : for(Integer i : recorrido)
-				 						monitor.set(i,(int)t.getPrimario());
+				 						monitor.set(i,(double)t.getPrimario());
 		 		 					break;
 				case ASSIGN 	  : for(Integer i : recorrido)
 										monitor.set(i,(int)t.getPrimario());
