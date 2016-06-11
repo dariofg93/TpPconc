@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import recursos.Funciones.TipoDeFuncion;
+import recursos.Functions.TipoDeFuncion;
 import tpConcurrente.MonitorConcurDerivative;
 
 public class ConcurUser extends Thread{

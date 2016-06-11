@@ -3,18 +3,21 @@ package tpConcurrente;
 import java.util.ArrayList;
 
 import threads.ConcurUser;
-import threads.GeneratorThreads;
+import recursos.Barrier;
+import recursos.GeneratorThreads;
 
 public class MonitorConcurDerivative {
 
-	private Integer threadsTotal; 		//la cantidad maxima de threads a utilizar
-	private double[] elements;			//el vector que se recorre de ser necesario
+	private Integer threadsTotal; 		
+	private double[] elements;			
 	private ArrayList<ConcurUser> workers;
+	private Barrier barrera;
 	
 	public MonitorConcurDerivative(int size, Integer cantTotal) {
 		elements = new double[size];
 		threadsTotal = cantTotal;
 		workers = (new GeneratorThreads()).comenzarThreads(this);
+		barrera = new Barrier(size+1);
 	}
 	
 	public int dimension() {
