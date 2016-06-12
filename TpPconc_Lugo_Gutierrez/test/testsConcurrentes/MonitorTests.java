@@ -50,8 +50,8 @@ public class MonitorTests {
 		//	assertTrue((Double)derivative.get(i)==5.0);
 		//}
 	}
-	
-	/**@Test
+	/**
+	@Test
 	public void testAssign() {
 		
 		
@@ -155,7 +155,7 @@ public class MonitorTests {
 		assertEquals(derivative.get(8),2,0);
 		assertEquals(derivative.get(9),2,0);
 	}
-	
+	/**
 	@Test
 	public void testDiferenttiate() {
 		

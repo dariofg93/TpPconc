@@ -28,6 +28,32 @@ public class GeneratorThreads {
 		return numerosHastaSize(monitor).subList((
 				vectorSize-(vectorSize % cantThreads)+1), vectorSize);
 	}
+	
+	//Prop: Asigno un recorrido a un thread con un size correspondiente a
+		// la cantidad de elementos que debe recorrer. Devuelve el 
+		// recorrido sobrante
+		private ArrayList<Integer> asignarRecorrido(ConcurUser user, ArrayList<Integer> rec,
+												MonitorConcurDerivative monitor) {
+			ArrayList<Integer> recCortado = rec;
+			Integer i = monitor.getVector().length / monitor.limiteDeThreads();
+			
+			while(i>0){
+				user.añadirAlRecorrido(recCortado.get(0));
+				recCortado.remove(0);
+				i--;
+			}
+			return recCortado;
+		}
+		
+		//Devuelve una lista desde 0 hasta el size-1 del vector del monitor
+		private ArrayList<Integer> numerosHastaSize(MonitorConcurDerivative monitor){
+			
+			ArrayList<Integer> list = new ArrayList<Integer>();
+			
+			for(int i = 0 ; i < monitor.getVector().length; i++)
+				list.add(i);
+			return list;
+		}
 
 	//Dada una lista de threads, le da los valores necesarios finales y los inicializa
 	private ArrayList<ConcurUser> inicializarThreads(ArrayList<ConcurUser> users,MonitorConcurDerivative monitor){
@@ -45,34 +71,9 @@ public class GeneratorThreads {
 			    restantes.remove(0);
 			}
 			threads.add(t);
+			t.start();
 		}
 		return threads;
-	}
-
-	//Prop: Asigno un recorrido a un thread con un size correspondiente a
-	// la cantidad de elementos que debe recorrer. Devuelve el 
-	// recorrido sobrante
-	private ArrayList<Integer> asignarRecorrido(ConcurUser user, ArrayList<Integer> rec,
-											MonitorConcurDerivative monitor) {
-		ArrayList<Integer> recCortado = rec;
-		Integer i = monitor.getVector().length / monitor.limiteDeThreads();
-		
-		while(i>0){
-			user.añadirAlRecorrido(recCortado.get(0));
-			recCortado.remove(0);
-			i--;
-		}
-		return recCortado;
-	}
-	
-	//Devuelve una lista desde 0 hasta el size-1 del vector del monitor
-	private ArrayList<Integer> numerosHastaSize(MonitorConcurDerivative monitor){
-		
-		ArrayList<Integer> list = new ArrayList<Integer>();
-		
-		for(int i = 0 ; i < monitor.getVector().length; i++)
-			list.add(i);
-		return list;
 	}
 
 	//Metodo publico para la generacion de threads desde un test

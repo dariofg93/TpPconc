@@ -13,9 +13,10 @@ public class Barrier {
 	public synchronized void ready(){
 		actuales++;
 	
-		if(actuales < permisos)
+		if(actuales < permisos){
 			try { wait(); } 
 			catch (InterruptedException e) {}
+		}
 		
 		this.notifyAll();
 		actuales = 0;
