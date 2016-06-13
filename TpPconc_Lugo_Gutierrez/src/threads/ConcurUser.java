@@ -80,8 +80,4 @@ public class ConcurUser extends Thread{
 			System.out.println(n+",");
 		System.out.println("|||");
 	}
-
-	public synchronized void despertar() {
-		this.notify();
-	}
 }
