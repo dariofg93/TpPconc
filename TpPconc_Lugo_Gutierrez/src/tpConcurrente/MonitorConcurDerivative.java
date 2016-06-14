@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import threads.ConcurUser;
 import recursos.Barrier;
+import recursos.Buffer;
 import recursos.GeneratorThreads;
 import recursos.Task;
 import recursos.Functions.TipoDeFuncion;
@@ -13,13 +14,14 @@ public class MonitorConcurDerivative {
 	private Integer threadsTotal; 		
 	private double[] elements;			
 	private ArrayList<ConcurUser> workers;
-	private Barrier barrera;
+	private Buffer buff;
 		
 	public MonitorConcurDerivative(int size, Integer cantTotal) {
 		elements = new double[size];
 		threadsTotal = cantTotal;
+		buff = new Buffer(50);
 		workers = (new GeneratorThreads()).comenzarThreads(this);
-		barrera = new Barrier(1);
+		
 	}
 	
 	public int dimension() {
@@ -36,7 +38,6 @@ public class MonitorConcurDerivative {
 	
 	public synchronized void set(double d) {
 		distributte(new Task(TipoDeFuncion.SET,d));
-		barrera.ready();
 	}
 	
 	/** Copies the values from another vector into this vector.
@@ -92,10 +93,14 @@ public class MonitorConcurDerivative {
 	public Integer limiteDeThreads(){
 		return threadsTotal;
 	}
+	
+	public Buffer getBuff(){
+		return buff;
+	}
 
 	private void distributte(Task tarea){
 		for(ConcurUser w : workers){
-			w.agregarTarea(tarea);
+			buff.producir(tarea);
 		}
 	}
 	
