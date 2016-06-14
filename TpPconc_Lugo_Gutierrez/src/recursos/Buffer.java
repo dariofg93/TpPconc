@@ -9,7 +9,7 @@ public class Buffer {
 	private int actual=0;
 	
 	public Buffer(Integer cantThreads){
-		this.slots = new Task[1000];				//Los productores tendran 1000 lugares diferentes
+		this.slots = new Task[1000];				//Los productores tendran hasta 1000 lugares diferentes
 													//antes de que venga algun thrad a consumir
 		this.barrera = new Barrier(cantThreads+1);
 	}
