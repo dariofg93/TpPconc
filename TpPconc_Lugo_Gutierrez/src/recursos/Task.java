@@ -1,37 +1,37 @@
 package recursos;
 
 import recursos.Functions.TipoDeFuncion;
+import tpConcurrente.MonitorConcurDerivative;
 
 public class Task {
 
 	private TipoDeFuncion funcion;
-	private Object primario;
-	private Object segundario;
+	private MonitorConcurDerivative monitor;
+	private double num;
 	
 	public Task(TipoDeFuncion f){
 		this.funcion = f;
 	}
 	
-	public Task(TipoDeFuncion f, Object p){
+	public Task(TipoDeFuncion f, MonitorConcurDerivative m){
 		this.funcion = f;
-		this.primario = p;
+		this.monitor = m;
 	}
 	
-	public Task(TipoDeFuncion f, Object p, Object s){
+	public Task(TipoDeFuncion f, double n){
 		this.funcion = f;
-		this.primario = p;
-		this.segundario = s;
+		this.num = n;
 	}
 	
 	public TipoDeFuncion getFuncion() {
 		return funcion;
 	}
 
-	public Object getPrimario() {
-		return primario;
+	public MonitorConcurDerivative getMonitor() {
+		return monitor;
 	}
 
-	public Object getSegundario() {
-		return segundario;
+	public double getNum() {
+		return num;
 	}
 }

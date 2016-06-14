@@ -3,7 +3,6 @@ package tpConcurrente;
 import java.util.ArrayList;
 
 import threads.ConcurUser;
-import recursos.Barrier;
 import recursos.Buffer;
 import recursos.GeneratorThreads;
 import recursos.Task;
@@ -19,7 +18,7 @@ public class MonitorConcurDerivative {
 	public MonitorConcurDerivative(int size, Integer cantTotal) {
 		elements = new double[size];
 		threadsTotal = cantTotal;
-		buff = new Buffer(50);
+		buff = new Buffer(cantTotal);
 		workers = (new GeneratorThreads()).comenzarThreads(this);
 		
 	}
@@ -99,9 +98,7 @@ public class MonitorConcurDerivative {
 	}
 
 	private void distributte(Task tarea){
-		for(ConcurUser w : workers){
-			buff.producir(tarea);
-		}
+		buff.producir(tarea);
 	}
 	
 	public void imprimirVector(){

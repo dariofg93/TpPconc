@@ -21,5 +21,9 @@ public class Barrier {
 		this.notifyAll();
 		actuales = 0;
 	}
+
+	public int getPermisos() {
+		return permisos;
+	}
 	
 }

@@ -1,8 +1,6 @@
 package threads;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
 
 import recursos.Buffer;
 import recursos.Task;
@@ -28,11 +26,11 @@ public class ConcurUser extends Thread{
 			switch(t.getFuncion()){
 				
 				case SET 		  : for(Integer i : recorrido)
-					 					monitor.set(i,(double)t.getPrimario());
+					 					monitor.set(i,t.getNum());
 			 	 					break;
 			 		 					
 				case ASSIGN 	  : for(Integer i : recorrido)
-										monitor.set(i,((MonitorConcurDerivative)t.getPrimario()).get(i));
+										monitor.set(i,t.getMonitor().get(i));
 									break;
 									
 				case ABS 		  : for(Integer i : recorrido)
@@ -40,23 +38,23 @@ public class ConcurUser extends Thread{
 									break;
 									
 				case ADD 		  : for(Integer i : recorrido)
-										monitor.set(i,monitor.get(i)+((MonitorConcurDerivative)t.getPrimario()).get(i));
+										monitor.set(i,monitor.get(i) + t.getMonitor().get(i));
 									break;
 										
 				case SUB 		  : for(Integer i : recorrido)
-										monitor.set(i,monitor.get(i)-((MonitorConcurDerivative)t.getPrimario()).get(i));
+										monitor.set(i,monitor.get(i) - t.getMonitor().get(i));
 									break;
 									
 				case MUL 		  : for(Integer i : recorrido)
-										monitor.set(i,monitor.get(i)*((MonitorConcurDerivative)t.getPrimario()).get(i));
+										monitor.set(i,monitor.get(i) * t.getMonitor().get(i));
 									break;
 									
 				case DIV 		  : for(Integer i : recorrido)
-											monitor.set(i,monitor.get(i)/((MonitorConcurDerivative)t.getPrimario()).get(i));
+										monitor.set(i,monitor.get(i) / t.getMonitor().get(i));
 									break;
 									
 				case DIFFERENTIATE: for(Integer i : recorrido)
-										monitor.set(i,(int)t.getPrimario());
+										//monitor.set(i,t.getMonitor());
 									break;
 			}
 		}
