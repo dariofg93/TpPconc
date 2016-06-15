@@ -49,7 +49,7 @@ public class MonitorTests {
 		//	assertTrue((Double)derivative.get(i)==5.0);
 		//}
 	}
-	
+	/**
 	@Test
 	public void testAssign() {
 		
@@ -170,5 +170,5 @@ public class MonitorTests {
 		assertTrue(derivativeRes.get(5)==1);
 		assertTrue(derivativeRes.get(6)==1);
 		assertTrue(derivativeRes.get(7)==1);
-	}
+	}*/
 }

@@ -2,7 +2,7 @@ package threads;
 
 import java.util.ArrayList;
 
-import recursos.Buffer;
+import recursos.Barrier;
 import recursos.Task;
 import tpConcurrente.MonitorConcurDerivative;
 
@@ -10,19 +10,21 @@ public class ConcurUser extends Thread{
 
 	private MonitorConcurDerivative monitor;
 	private ArrayList<Integer> recorrido;
-	private Buffer buff;
+	//private Buffer buff;
+	private Barrier barrera;
 	
-	public ConcurUser(MonitorConcurDerivative monitor, Buffer unBuff){
+	public ConcurUser(MonitorConcurDerivative monitor/**, Buffer unBuff*/){
 		this.monitor = monitor;
 		this.recorrido = new ArrayList<Integer>();
-		this.buff = unBuff;
+		//this.buff = unBuff;
+		this.barrera = new Barrier(1);
 	}
 	
 	@Override
 	public void run() {
 		
 		while(true){
-			Task t = buff.consumir();
+			Task t = monitor.getBuff().consumir();
 			switch(t.getFuncion()){
 				
 				case SET 		  : for(Integer i : recorrido)
@@ -59,6 +61,7 @@ public class ConcurUser extends Thread{
 									}
 									break;
 			}
+			barrera.ready();
 		}
 	}
 	

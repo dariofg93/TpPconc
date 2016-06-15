@@ -5,13 +5,10 @@ public class Buffer {
 	private Task[] slots;
 	private int begin=0;
 	private int end=0;
-	private Barrier barrera;
 	private int actual=0;
 	
-	public Buffer(Integer cantThreads, int size){
-		this.slots = new Task[size];				//Los productores tendran hasta 1000 lugares diferentes
-													//antes de que venga algun thrad a consumir
-		this.barrera = new Barrier(cantThreads+1);
+	public Buffer(int size){
+		this.slots = new Task[size];
 	}
 	
 	private boolean isEmpty() {
@@ -35,19 +32,17 @@ public class Buffer {
 	}
 	
 	public synchronized Task consumir() {
-		actual++;
+		
 		while (isEmpty()){
 			try {this.wait();} 
 			catch (InterruptedException e) {}
 		}
-		
+		actual++;
 		Task result = slots[end];
-		if(actual==barrera.getPermisos())
+		if(actual==5+1){
 			end = end+1 % this.slots.length;
-		
-		//barrera.ready();
-		
-		actual = 0;
+			actual = 0;
+		}
 		return result;
 	}
 }

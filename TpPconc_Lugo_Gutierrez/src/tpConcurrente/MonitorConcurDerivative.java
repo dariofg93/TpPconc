@@ -1,5 +1,6 @@
 package tpConcurrente;
 
+import recursos.Barrier;
 import recursos.Buffer;
 import recursos.GeneratorThreads;
 import recursos.Task;
@@ -11,13 +12,14 @@ public class MonitorConcurDerivative {
 	private double[] elements;			
 	//private ArrayList<ConcurUser> workers;
 	private Buffer buff;
+	private Barrier barrera;
 		
 	public MonitorConcurDerivative(int size, Integer cantTotal) {
 		elements = new double[size];
 		threadsTotal = cantTotal;
-		buff = new Buffer(cantTotal,1000);
+		buff = new Buffer(1000);
+		this.barrera = new Barrier(cantTotal+1);
 		/**workers = */(new GeneratorThreads()).comenzarThreads(this);
-		
 	}
 	
 	public int dimension() {
@@ -98,6 +100,7 @@ public class MonitorConcurDerivative {
 	}
 	
 	public Buffer getBuff(){
+		barrera.ready();
 		return buff;
 	}
 

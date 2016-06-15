@@ -13,7 +13,7 @@ public class GeneratorThreads {
 		
 		ArrayList<ConcurUser> threads = new ArrayList<ConcurUser>();
 		for(int i = 0 ; i<monitor.limiteDeThreads(); i++)
-			threads.add(new ConcurUser(monitor,monitor.getBuff()));
+			threads.add(new ConcurUser(monitor/**,monitor.getBuff()*/));
 		
 		return threads;
 	}
