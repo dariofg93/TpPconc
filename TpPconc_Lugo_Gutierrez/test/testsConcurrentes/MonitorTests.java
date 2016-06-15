@@ -43,13 +43,13 @@ public class MonitorTests {
 	@Test
 	public void testSet2() {
 		
-		derivative.set(5);
-		derivative.imprimirVector();
+		derivative2.set(5);
+		derivative2.imprimirVector();
 		//for(int i = 0; i<10; i++){
 		//	assertTrue((Double)derivative.get(i)==5.0);
 		//}
 	}
-	/**
+	
 	@Test
 	public void testAssign() {
 		
@@ -71,27 +71,29 @@ public class MonitorTests {
 		
 		derivative.abs();
 	
-		assertEquals(derivative.get(0),1,0);
-		assertEquals(derivative.get(5),6,0);
-		assertEquals(derivative.get(9),10,0);
+		assertTrue(derivative.get(0).equals(1.0));
+		assertTrue(derivative.get(5).equals(6));
+		assertTrue(derivative.get(9).equals(10));
 	}
 	
 	@Test
 	public void testAdd() {
+
+		for(int i = 0, x = 0; i<10; i++,x+=3)
+			derivative.set(i,x);
 		
-		derivative.assign(derivative2);
 		derivative.add(derivative2);
 		
-		assertEquals(derivative.get(0),2,0);
-		assertEquals(derivative.get(1),4,0);
-		assertEquals(derivative.get(2),6,0);
-		assertEquals(derivative.get(3),8,0);
-		assertEquals(derivative.get(4),10,0);
-		assertEquals(derivative.get(5),12,0);
-		assertEquals(derivative.get(6),14,0);
-		assertEquals(derivative.get(7),16,0);
-		assertEquals(derivative.get(8),18,0);
-		assertEquals(derivative.get(9),20,0);
+		assertTrue(derivative.get(0).equals(1.0));
+		assertTrue(derivative.get(1).equals(5.0));
+		assertTrue(derivative.get(1).equals(9.0));
+		assertTrue(derivative.get(1).equals(13.0));
+		assertTrue(derivative.get(1).equals(17.0));
+		assertTrue(derivative.get(1).equals(21.0));
+		assertTrue(derivative.get(1).equals(25.0));
+		assertTrue(derivative.get(1).equals(29.0));
+		assertTrue(derivative.get(1).equals(33.0));
+		assertTrue(derivative.get(1).equals(37.0));
 		
 		
 	}
@@ -154,28 +156,19 @@ public class MonitorTests {
 		assertEquals(derivative.get(8),2,0);
 		assertEquals(derivative.get(9),2,0);
 	}
-	/**
+	
 	@Test
 	public void testDiferenttiate() {
-		
-		derivative.assign(derivative2);
-		
-		ConcurDerivative derivativeInicial = derivative2;
-		
-		for(int i = 0; i<10; i++){
-			derivative.set(i,(double)Math.pow(derivative.get(i), 2));	
-		}
 				 
-		ConcurDerivative derivativeRes = derivative.differentiate();
-				
-		assertEquals(derivativeRes.get(0),2*(derivativeInicial.get(1)),0.01);
-		assertEquals(derivativeRes.get(1),2*(derivativeInicial.get(2)),0.01);
-		assertEquals(derivativeRes.get(2),2*(derivativeInicial.get(3)),0.01);
-		assertEquals(derivativeRes.get(3),2*(derivativeInicial.get(4)),0.01);
-		assertEquals(derivativeRes.get(4),2*(derivativeInicial.get(5)),0.01);
-		assertEquals(derivativeRes.get(5),2*(derivativeInicial.get(6)),0.01);
-		assertEquals(derivativeRes.get(6),2*(derivativeInicial.get(7)),0.01);
-		assertEquals(derivativeRes.get(7),2*(derivativeInicial.get(8)),0.01);
-		
-	}*/
+		MonitorConcurDerivative derivativeRes = derivative2.differentiate();
+
+		assertTrue(derivativeRes.get(0)==1);
+		assertTrue(derivativeRes.get(1)==1);
+		assertTrue(derivativeRes.get(2)==1);
+		assertTrue(derivativeRes.get(3)==1);
+		assertTrue(derivativeRes.get(4)==1);
+		assertTrue(derivativeRes.get(5)==1);
+		assertTrue(derivativeRes.get(6)==1);
+		assertTrue(derivativeRes.get(7)==1);
+	}
 }

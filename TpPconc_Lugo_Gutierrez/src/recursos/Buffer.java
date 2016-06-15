@@ -45,7 +45,7 @@ public class Buffer {
 		if(actual==barrera.getPermisos())
 			end = end+1 % this.slots.length;
 		
-		barrera.ready();
+		//barrera.ready();
 		
 		actual = 0;
 		return result;
