@@ -10,7 +10,6 @@ public class MonitorConcurDerivative {
 
 	private Integer threadsTotal; 		
 	private double[] elements;			
-	//private ArrayList<ConcurUser> workers;
 	private Buffer buff;
 	private Barrier barrera;
 		
@@ -19,7 +18,7 @@ public class MonitorConcurDerivative {
 		threadsTotal = cantTotal;
 		buff = new Buffer(1000);
 		this.barrera = new Barrier(cantTotal+1);
-		/**workers = */(new GeneratorThreads()).comenzarThreads(this);
+			(new GeneratorThreads()).comenzarThreads(this);
 	}
 	
 	public int dimension() {
@@ -44,12 +43,14 @@ public class MonitorConcurDerivative {
 	 * @precondition dimension() == v.dimension(). */
 	public synchronized void assign(MonitorConcurDerivative v) {
 		distributte(new Task(TipoDeFuncion.ASSIGN,v));
+		barrera.ready();
 	}
 	
 	
 	/** Applies the absolute value operation to every element in this vector. */
 	public synchronized void abs() {
 		distributte(new Task(TipoDeFuncion.ABS));
+		barrera.ready();
 	}
 	
 	
@@ -58,6 +59,7 @@ public class MonitorConcurDerivative {
 	 * @precondition dimension() == v.dimension(). */
 	public synchronized void add(MonitorConcurDerivative v) {
 		distributte(new Task(TipoDeFuncion.ADD));
+		barrera.ready();
 	}
 	
 	
@@ -66,6 +68,7 @@ public class MonitorConcurDerivative {
 	 * @precondition dimension() == v.dimension(). */
 	public synchronized void sub(MonitorConcurDerivative v) {
 		distributte(new Task(TipoDeFuncion.SUB));
+		barrera.ready();
 	}
 	
 	
@@ -74,6 +77,7 @@ public class MonitorConcurDerivative {
 	 * @precondition dimension() == v.dimension(). */
 	public synchronized void mul(MonitorConcurDerivative v) {
 		distributte(new Task(TipoDeFuncion.MUL));
+		barrera.ready();
 	}
 	
 	
@@ -82,11 +86,13 @@ public class MonitorConcurDerivative {
 	 * @precondition dimension() == v.dimension(). */
 	public synchronized void div(MonitorConcurDerivative v) {
 		distributte(new Task(TipoDeFuncion.DIV));
+		barrera.ready();
 	}
 	
 	public synchronized MonitorConcurDerivative differentiate() {
 		MonitorConcurDerivative result = new MonitorConcurDerivative(dimension()-2,threadsTotal);
 		distributte(new Task(TipoDeFuncion.DIFFERENTIATE,result));
+		barrera.ready();
 		
 		return result;
 	}

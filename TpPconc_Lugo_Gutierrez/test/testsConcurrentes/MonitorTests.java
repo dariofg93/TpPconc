@@ -16,7 +16,7 @@ public class MonitorTests {
 	public void setUp(){
 		
 		derivative = new MonitorConcurDerivative(10,5);
-		derivative2 = new MonitorConcurDerivative(10,4);
+		derivative2 = new MonitorConcurDerivative(10,5);
 		
 		for(int i = 0; i<10; i++){
 			derivative2.set(i,i+1);
@@ -43,11 +43,11 @@ public class MonitorTests {
 	@Test
 	public void testSet2() {
 		
-		derivative2.set(5);
-		derivative2.imprimirVector();
-		//for(int i = 0; i<10; i++){
-		//	assertTrue((Double)derivative.get(i)==5.0);
-		//}
+		derivative.set(5);
+		derivative.imprimirVector();
+		for(int i = 0; i<10; i++){
+			assertTrue(derivative.get(i)==5.0);
+		}
 	}
 	/**
 	@Test
@@ -61,7 +61,7 @@ public class MonitorTests {
 		}
 	
 	}
-	
+	/**
 	@Test
 	public void testAbs() {
 		

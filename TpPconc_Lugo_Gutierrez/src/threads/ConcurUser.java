@@ -2,7 +2,6 @@ package threads;
 
 import java.util.ArrayList;
 
-import recursos.Barrier;
 import recursos.Task;
 import tpConcurrente.MonitorConcurDerivative;
 
@@ -10,14 +9,10 @@ public class ConcurUser extends Thread{
 
 	private MonitorConcurDerivative monitor;
 	private ArrayList<Integer> recorrido;
-	//private Buffer buff;
-	private Barrier barrera;
 	
-	public ConcurUser(MonitorConcurDerivative monitor/**, Buffer unBuff*/){
+	public ConcurUser(MonitorConcurDerivative monitor){
 		this.monitor = monitor;
 		this.recorrido = new ArrayList<Integer>();
-		//this.buff = unBuff;
-		this.barrera = new Barrier(1);
 	}
 	
 	@Override
