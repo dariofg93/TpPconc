@@ -53,8 +53,10 @@ public class ConcurUser extends Thread{
 										monitor.set(i,monitor.get(i) / t.getMonitor().get(i));
 									break;
 									
-				case DIFFERENTIATE: for(Integer i : recorrido)
-										//monitor.set(i,t.getMonitor());
+				case DIFFERENTIATE: for(Integer i : recorrido){
+										if(!(i==0 || i==(monitor.dimension()-1)))
+											t.getMonitor().set(i -1, (monitor.get(i+1) - monitor.get(i-1)) / 2);
+									}
 									break;
 			}
 		}
@@ -62,11 +64,5 @@ public class ConcurUser extends Thread{
 	
 	public void añadirAlRecorrido(Integer n) {
 		recorrido.add(n);
-	}
-	
-	public void imprimirRecorrido(){
-		for(Integer n: recorrido)
-			System.out.println(n+",");
-		System.out.println("|||");
 	}
 }

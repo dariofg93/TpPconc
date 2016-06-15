@@ -1,8 +1,5 @@
 package tpConcurrente;
 
-import java.util.ArrayList;
-
-import threads.ConcurUser;
 import recursos.Buffer;
 import recursos.GeneratorThreads;
 import recursos.Task;
@@ -12,14 +9,14 @@ public class MonitorConcurDerivative {
 
 	private Integer threadsTotal; 		
 	private double[] elements;			
-	private ArrayList<ConcurUser> workers;
+	//private ArrayList<ConcurUser> workers;
 	private Buffer buff;
 		
 	public MonitorConcurDerivative(int size, Integer cantTotal) {
 		elements = new double[size];
 		threadsTotal = cantTotal;
-		buff = new Buffer(cantTotal);
-		workers = (new GeneratorThreads()).comenzarThreads(this);
+		buff = new Buffer(cantTotal,1000);
+		/**workers = */(new GeneratorThreads()).comenzarThreads(this);
 		
 	}
 	
@@ -84,6 +81,13 @@ public class MonitorConcurDerivative {
 		distributte(new Task(TipoDeFuncion.DIV));
 	}
 	
+	public synchronized MonitorConcurDerivative differentiate() {
+		MonitorConcurDerivative result = new MonitorConcurDerivative(dimension()-2,threadsTotal);
+		distributte(new Task(TipoDeFuncion.DIFFERENTIATE,result));
+		
+		return result;
+	}
+	
 	//Devuelve el vector del monitor
 	public double[] getVector() {
 		return elements;
@@ -104,11 +108,5 @@ public class MonitorConcurDerivative {
 	public void imprimirVector(){
 		for(double e : elements)
 			System.out.print(" "+e+" |||");
-	}
-	
-	public void imprimirRecorridos(){
-		for(ConcurUser w: workers)
-			w.imprimirRecorrido();
-		
 	}
 }
