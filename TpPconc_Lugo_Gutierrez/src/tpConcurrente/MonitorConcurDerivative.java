@@ -36,6 +36,7 @@ public class MonitorConcurDerivative {
 	
 	public synchronized void set(double d) {
 		distributte(new Task(TipoDeFuncion.SET,d));
+		barrera.ready();
 	}
 	
 	/** Copies the values from another vector into this vector.
@@ -100,7 +101,6 @@ public class MonitorConcurDerivative {
 	}
 	
 	public Buffer getBuff(){
-		barrera.ready();
 		return buff;
 	}
 
@@ -111,5 +111,9 @@ public class MonitorConcurDerivative {
 	public void imprimirVector(){
 		for(double e : elements)
 			System.out.print(" "+e+" |||");
+	}
+	
+	public Barrier getBarrera(){
+		return barrera;
 	}
 }

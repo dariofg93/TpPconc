@@ -61,7 +61,7 @@ public class ConcurUser extends Thread{
 									}
 									break;
 			}
-			barrera.ready();
+			monitor.getBarrera().ready();
 		}
 	}
 	
