@@ -56,13 +56,11 @@ public class MonitorConcurDerivative {
 		barrera.ready();
 	}
 	
-	
 	/** Applies the absolute value operation to every element in this vector. */
 	public synchronized void abs() {
 		distributte(new Task(TipoDeFuncion.ABS));
 		barrera.ready();
 	}
-	
 	
 	/** Adds the elements of this vector with the values of another (element-wise).
 	 * @param v, a vector from which to get the second operands.
@@ -72,7 +70,6 @@ public class MonitorConcurDerivative {
 		barrera.ready();
 	}
 	
-	
 	/** Subtracts from the elements of this vector the values of another (element-wise).
 	 * @param v, a vector from which to get the second operands.
 	 * @precondition dimension() == v.dimension(). */
@@ -80,7 +77,6 @@ public class MonitorConcurDerivative {
 		distributte(new Task(TipoDeFuncion.SUB,v));
 		barrera.ready();
 	}
-	
 	
 	/** Multiplies the elements of this vector by the values of another (element-wise).
 	 * @param v, a vector from which to get the second operands.
@@ -90,7 +86,6 @@ public class MonitorConcurDerivative {
 		barrera.ready();
 	}
 	
-	
 	/** Divides the elements of this vector by the values of another (element-wise).
 	 * @param v, a vector from which to get the second operands.
 	 * @precondition dimension() == v.dimension(). */
@@ -99,15 +94,21 @@ public class MonitorConcurDerivative {
 		barrera.ready();
 	}
 	
+	/** Computes the derivative of the function represented by this vector,
+	 *  using the finite differences method.
+	 *  @param window, an integer with the number of element to each side of
+	 *         the current element to be considered by the method.
+	 *  @return a ConcurDerivative with the result of the derivative procedure. */
 	public synchronized MonitorConcurDerivative differentiate() {
 		MonitorConcurDerivative result = new MonitorConcurDerivative(dimension()-2,threadsTotal);
+		
 		distributte(new Task(TipoDeFuncion.DIFFERENTIATE,result));
 		barrera.ready();
 		
 		return result;
 	}
 	
-	//Devuelve el vector del monitor
+	/////////////getters////////////////////////
 	public double[] getVector() {
 		return elements;
 	}
@@ -119,17 +120,18 @@ public class MonitorConcurDerivative {
 	public Buffer getBuff(){
 		return buff;
 	}
-
+	////////////////////////////////////////////
+	
 	private void distributte(Task tarea){
 		buff.producir(tarea);
+	}
+	
+	public void irABarrera(){
+		barrera.ready();
 	}
 	
 	public void imprimirVector(){
 		for(double e : elements)
 			System.out.print(" "+e+" |||");
-	}
-	
-	public Barrier getBarrera(){
-		return barrera;
 	}
 }
