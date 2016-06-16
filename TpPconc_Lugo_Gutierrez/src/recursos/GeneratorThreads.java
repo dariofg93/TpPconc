@@ -8,18 +8,20 @@ import tpConcurrente.MonitorConcurDerivative;
 
 public class GeneratorThreads {
 	
-	//crea n instancias de threads de un tipo correspondiente
+	//Prop: Crea n instancias de threads de un tipo correspondiente
 	private ArrayList<ConcurUser> creacionDeThreads(MonitorConcurDerivative monitor){
 		
 		ArrayList<ConcurUser> threads = new ArrayList<ConcurUser>();
 		for(int i = 0 ; i<monitor.limiteDeThreads(); i++)
-			threads.add(new ConcurUser(monitor/**,monitor.getBuff()*/));
+			threads.add(new ConcurUser(monitor));
 		
 		return threads;
 	}
 	
+	//Prop: Devuelve una lista de los enteros que representan los lugares
+		//que sobran al hacer una division de lugares "pareja" de un 
+		//vector entre threads 
 	private List<Integer> indexSobrantes(int vectorSize, int cantThreads, MonitorConcurDerivative monitor) {
-		
 		
 		if((vectorSize % cantThreads)==0){
 		return numerosHastaSize(monitor).subList((
@@ -56,11 +58,11 @@ public class GeneratorThreads {
 		}
 
 	//Dada una lista de threads, le da los valores necesarios finales y los inicializa
-	private ArrayList<ConcurUser> inicializarThreads(ArrayList<ConcurUser> users,MonitorConcurDerivative monitor){
+	private void inicializarThreads(ArrayList<ConcurUser> users,MonitorConcurDerivative monitor){
 
 		ArrayList<Integer> indexOfVector;
 		indexOfVector = numerosHastaSize(monitor);
-		ArrayList<ConcurUser> threads = new ArrayList<ConcurUser>();
+		//ArrayList<ConcurUser> threads = new ArrayList<ConcurUser>();
 		List<Integer> restantes = indexSobrantes(monitor.getVector().length,
 												 users.size(),monitor);
 	
@@ -70,16 +72,16 @@ public class GeneratorThreads {
 				t.añadirAlRecorrido(restantes.get(0));
 			    restantes.remove(0);
 			}
-			threads.add(t);
+			//threads.add(t);
 			t.start();
 		}
-		return threads;
+		//return threads;
 	}
 
 	//Metodo publico para la generacion de threads desde un test
-	public ArrayList<ConcurUser> comenzarThreads(MonitorConcurDerivative monitor)
+	public void comenzarThreads(MonitorConcurDerivative monitor)
 	{
 		ArrayList<ConcurUser> threads = creacionDeThreads(monitor);
-		return inicializarThreads(threads,monitor);
+		inicializarThreads(threads,monitor);
 	}
 }

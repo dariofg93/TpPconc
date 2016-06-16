@@ -9,6 +9,7 @@ public class Task {
 	private MonitorConcurDerivative monitor;
 	private double num;
 	
+	/** :::::::::::::::: Constructores :::::::::::::::::: */
 	public Task(TipoDeFuncion f){
 		this.funcion = f;
 	}
@@ -22,7 +23,9 @@ public class Task {
 		this.funcion = f;
 		this.num = n;
 	}
+	/** ::::::::::::::::::::::::::::::::::::::::::::::::: */
 	
+	//getters
 	public TipoDeFuncion getFuncion() {
 		return funcion;
 	}

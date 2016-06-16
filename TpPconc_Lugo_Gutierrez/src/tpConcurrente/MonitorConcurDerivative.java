@@ -16,23 +16,33 @@ public class MonitorConcurDerivative {
 	public MonitorConcurDerivative(int size, Integer cantTotal) {
 		elements = new double[size];
 		threadsTotal = cantTotal;
-		buff = new Buffer(1000);
+		buff = new Buffer(1000,cantTotal);
 		this.barrera = new Barrier(cantTotal+1);
-			(new GeneratorThreads()).comenzarThreads(this);
+		(new GeneratorThreads()).comenzarThreads(this);
 	}
 	
+	/** Returns the dimension of this vector, that is, its width. */
 	public int dimension() {
 		return elements.length;
 	}
 	
+	/** Returns the element at position i.
+	 * @param i, the position of the element to be returned.
+	 * @precondition 0 <= i < dimension(). */
 	public Double get(int i) {
 		return elements[i];	
 	}
 
+	/** Assigns the value d to the position i of this vector. 
+	 * @param i, the position to be set.
+	 * @param d, the value to assign at i.
+	 * @precondition 0 <= i < dimension. */
 	public void set(int i, double d){
 		elements[i] = d;
 	}
 	
+	/** Assigns the value d to every position of this vector. 
+	 * @param d, the value to assigned. */
 	public synchronized void set(double d) {
 		distributte(new Task(TipoDeFuncion.SET,d));
 		barrera.ready();

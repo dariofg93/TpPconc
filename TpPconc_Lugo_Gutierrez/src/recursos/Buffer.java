@@ -6,19 +6,30 @@ public class Buffer {
 	private int begin=0;
 	private int end=0;
 	private int actual=0;
+	private int cantThreads;
 	
-	public Buffer(int size){
+	public Buffer(int size, int threadsTotal){
 		this.slots = new Task[size];
+		this.cantThreads = threadsTotal;
 	}
-	
+
+	/**
+	 * Prop.: Devuelve true si no hay elementos en el Buffer
+	 */
 	private boolean isEmpty() {
 		return begin==end;
 	}
-	
+
+	/**
+	 * Prop.: Devuelve true si el Buffer esta lleno
+	 */
 	private boolean isFull() {
 		return (begin+1 % slots.length)==end;
 	}
-		
+	
+	/**
+	 * Prop.: Agrega una nueva tarea al Buffer
+	 */
 	public synchronized void producir(Task tarea){
 		while (isFull()){
 			try {this.wait();} 
@@ -31,6 +42,9 @@ public class Buffer {
 		this.notifyAll();
 	}
 	
+	/**
+	 * Prop.: Quita la primer tarea disponible del Buffer y la devuelve,
+	 */
 	public synchronized Task consumir() {
 		
 		while (isEmpty()){
@@ -39,7 +53,9 @@ public class Buffer {
 		}
 		actual++;
 		Task result = slots[end];
-		if(actual==5+1){
+		if(actual==cantThreads+1){		
+		//El ultimo thread que debe pedir la tarea es quien 
+			//cambia dice cual es la siguinete tarea del Buffer
 			end = end+1 % this.slots.length;
 			actual = 0;
 		}
