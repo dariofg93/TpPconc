@@ -21,20 +21,45 @@ public class MonitorTests {
 		for(int i = 0; i<10; i++){
 			derivative2.set(i,i+1);
 		}
-		
 	}
-
+	
 
 	@Test
-	public void testAssign() {
+	public void testDimension() {
 		
+		assertEquals(derivative.dimension(),10);
+	}
+	
+	@Test
+	public void testSet1yGet() {
+		
+		derivative.set(1,2);
+		derivative.set(2,3);
+		
+		assertEquals(derivative.get(1),2,0);
+		assertEquals(derivative.get(2),3,0);
+	}
+	
+	@Test
+	public void testSet2() {
+		
+		derivative.set(5);
+		
+		for(int i = 0; i<10; i++){
+			assertEquals(derivative.get(i),5,0);
+		}
+	}
+
+	
+	@Test
+	public void testAssign() {
 		
 		derivative.assign(derivative2);
 	
 		for(int i = 0; i<10; i++){
 			assertEquals(derivative.get(i),i+1,0);
 		}
-	
+		
 	}
 	
 	@Test
@@ -56,7 +81,6 @@ public class MonitorTests {
 
 		derivative.assign(derivative2);
 		derivative.add(derivative2);
-		System.out.print(derivative.get(8));
 		
 		assertTrue(derivative.get(0).equals(2.0));
 		assertTrue(derivative.get(1).equals(4.0));
@@ -80,16 +104,16 @@ public class MonitorTests {
 		
 		derivative.sub(derivative2);
 		
-		assertEquals(derivative.get(0),1,0);
-		assertEquals(derivative.get(1),2,0);
-		assertEquals(derivative.get(2),3,0);
-		assertEquals(derivative.get(3),4,0);
-		assertEquals(derivative.get(4),5,0);
-		assertEquals(derivative.get(5),6,0);
-		assertEquals(derivative.get(6),7,0);
-		assertEquals(derivative.get(7),8,0);
-		assertEquals(derivative.get(8),9,0);
-		assertEquals(derivative.get(9),10,0);
+		assertEquals(derivative.get(0),1,0.01);
+		assertEquals(derivative.get(1),2,0.01);
+		assertEquals(derivative.get(2),3,0.01);
+		assertEquals(derivative.get(3),4,0.01);
+		assertEquals(derivative.get(4),5,0.01);
+		assertEquals(derivative.get(5),6,0.01);
+		assertEquals(derivative.get(6),7,0.01);
+		assertEquals(derivative.get(7),8,0.01);
+		assertEquals(derivative.get(8),9,0.01);
+		assertEquals(derivative.get(9),10,0.01);
 	}
 	
 	@Test
