@@ -129,9 +129,4 @@ public class MonitorConcurDerivative {
 	public void irABarrera(){
 		barrera.ready();
 	}
-	
-	public void imprimirVector(){
-		for(double e : elements)
-			System.out.print(" "+e+" |||");
-	}
 }

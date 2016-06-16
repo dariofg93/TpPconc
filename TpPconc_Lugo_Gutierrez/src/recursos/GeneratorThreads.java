@@ -23,12 +23,8 @@ public class GeneratorThreads {
 		//vector entre threads 
 	private List<Integer> indexSobrantes(int vectorSize, int cantThreads, MonitorConcurDerivative monitor) {
 		
-		if((vectorSize % cantThreads)==0){
 		return numerosHastaSize(monitor).subList((
 					vectorSize-(vectorSize % cantThreads)), vectorSize);
-		}
-		return numerosHastaSize(monitor).subList((
-				vectorSize-(vectorSize % cantThreads)+1), vectorSize);
 	}
 	
 	//Prop: Asigno un recorrido a un thread con un size correspondiente a

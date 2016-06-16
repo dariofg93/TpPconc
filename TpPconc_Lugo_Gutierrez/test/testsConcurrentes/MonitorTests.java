@@ -15,8 +15,8 @@ public class MonitorTests {
 	@Before
 	public void setUp(){
 		
-		derivative = new MonitorConcurDerivative(10,5);
-		derivative2 = new MonitorConcurDerivative(10,5);
+		derivative = new MonitorConcurDerivative(25,9);
+		derivative2 = new MonitorConcurDerivative(25,14);
 		
 		for(int i = 0; i<10; i++){
 			derivative2.set(i,i+1);
@@ -27,7 +27,7 @@ public class MonitorTests {
 	@Test
 	public void testDimension() {
 		
-		assertEquals(derivative.dimension(),10);
+		assertEquals(derivative.dimension(),25);
 	}
 	
 	@Test
@@ -81,7 +81,7 @@ public class MonitorTests {
 
 		derivative.assign(derivative2);
 		derivative.add(derivative2);
-		derivative.imprimirVector();
+		
 		assertTrue(derivative.get(0).equals(2.0));
 		assertTrue(derivative.get(1).equals(4.0));
 		assertTrue(derivative.get(2).equals(6.0));
