@@ -53,9 +53,9 @@ public class Buffer {
 		}
 		actual++;
 		Task result = slots[end];
-		if(actual==cantThreads+1){		
+		if(actual==cantThreads){		
 		//El ultimo thread que debe pedir la tarea es quien 
-			//cambia dice cual es la siguinete tarea del Buffer
+			//cambia dice cual es la siguiente tarea del Buffer
 			end = end+1 % this.slots.length;
 			actual = 0;
 		}

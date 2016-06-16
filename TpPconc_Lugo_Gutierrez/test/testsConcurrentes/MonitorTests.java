@@ -81,7 +81,7 @@ public class MonitorTests {
 
 		derivative.assign(derivative2);
 		derivative.add(derivative2);
-		
+		derivative.imprimirVector();
 		assertTrue(derivative.get(0).equals(2.0));
 		assertTrue(derivative.get(1).equals(4.0));
 		assertTrue(derivative.get(2).equals(6.0));
@@ -92,7 +92,6 @@ public class MonitorTests {
 		assertTrue(derivative.get(7).equals(16.0));
 		assertTrue(derivative.get(8).equals(18.0));
 		assertTrue(derivative.get(9).equals(20.0));
-		
 		
 	}
 	
@@ -160,13 +159,13 @@ public class MonitorTests {
 				 
 		MonitorConcurDerivative derivativeRes = derivative2.differentiate();
 
-		assertTrue(derivativeRes.get(0)==1);
-		assertTrue(derivativeRes.get(1)==1);
-		assertTrue(derivativeRes.get(2)==1);
-		assertTrue(derivativeRes.get(3)==1);
-		assertTrue(derivativeRes.get(4)==1);
-		assertTrue(derivativeRes.get(5)==1);
-		assertTrue(derivativeRes.get(6)==1);
-		assertTrue(derivativeRes.get(7)==1);
+		assertTrue(derivativeRes.get(0).equals(1.0));
+		assertTrue(derivativeRes.get(1).equals(1.0));
+		assertTrue(derivativeRes.get(2).equals(1.0));
+		assertTrue(derivativeRes.get(3).equals(1.0));
+		assertTrue(derivativeRes.get(4).equals(1.0));
+		assertTrue(derivativeRes.get(5).equals(1.0));
+		assertTrue(derivativeRes.get(6).equals(1.0));
+		assertTrue(derivativeRes.get(7).equals(1.0));
 	}
 }
