@@ -24,32 +24,7 @@ public class MonitorTests {
 		
 	}
 
-	@Test
-	public void testDimension() {
-		
-		assertEquals(derivative.dimension(),10);
-	}
-	
-	@Test
-	public void testSet1yGet() {
-		
-		derivative.set(1,2);
-		derivative.set(2,3);
-		
-		assertEquals(derivative.get(1),2,0);
-		assertEquals(derivative.get(2),3,0);
-	}
-	
-	@Test
-	public void testSet2() {
-		
-		derivative.set(5);
-		derivative.imprimirVector();
-		for(int i = 0; i<10; i++){
-			assertTrue(derivative.get(i)==5.0);
-		}
-	}
-	/**
+
 	@Test
 	public void testAssign() {
 		
@@ -61,7 +36,7 @@ public class MonitorTests {
 		}
 	
 	}
-	/**
+	
 	@Test
 	public void testAbs() {
 		
@@ -72,28 +47,27 @@ public class MonitorTests {
 		derivative.abs();
 	
 		assertTrue(derivative.get(0).equals(1.0));
-		assertTrue(derivative.get(5).equals(6));
-		assertTrue(derivative.get(9).equals(10));
+		assertTrue(derivative.get(5).equals(6.0));
+		assertTrue(derivative.get(9).equals(10.0));
 	}
 	
 	@Test
 	public void testAdd() {
 
-		for(int i = 0, x = 0; i<10; i++,x+=3)
-			derivative.set(i,x);
-		
+		derivative.assign(derivative2);
 		derivative.add(derivative2);
+		System.out.print(derivative.get(8));
 		
-		assertTrue(derivative.get(0).equals(1.0));
-		assertTrue(derivative.get(1).equals(5.0));
-		assertTrue(derivative.get(1).equals(9.0));
-		assertTrue(derivative.get(1).equals(13.0));
-		assertTrue(derivative.get(1).equals(17.0));
-		assertTrue(derivative.get(1).equals(21.0));
-		assertTrue(derivative.get(1).equals(25.0));
-		assertTrue(derivative.get(1).equals(29.0));
-		assertTrue(derivative.get(1).equals(33.0));
-		assertTrue(derivative.get(1).equals(37.0));
+		assertTrue(derivative.get(0).equals(2.0));
+		assertTrue(derivative.get(1).equals(4.0));
+		assertTrue(derivative.get(2).equals(6.0));
+		assertTrue(derivative.get(3).equals(8.0));
+		assertTrue(derivative.get(4).equals(10.0));
+		assertTrue(derivative.get(5).equals(12.0));
+		assertTrue(derivative.get(6).equals(14.0));
+		assertTrue(derivative.get(7).equals(16.0));
+		assertTrue(derivative.get(8).equals(18.0));
+		assertTrue(derivative.get(9).equals(20.0));
 		
 		
 	}
@@ -170,5 +144,5 @@ public class MonitorTests {
 		assertTrue(derivativeRes.get(5)==1);
 		assertTrue(derivativeRes.get(6)==1);
 		assertTrue(derivativeRes.get(7)==1);
-	}*/
+	}
 }

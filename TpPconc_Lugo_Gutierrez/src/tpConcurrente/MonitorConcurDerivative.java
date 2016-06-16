@@ -58,7 +58,7 @@ public class MonitorConcurDerivative {
 	 * @param v, a vector from which to get the second operands.
 	 * @precondition dimension() == v.dimension(). */
 	public synchronized void add(MonitorConcurDerivative v) {
-		distributte(new Task(TipoDeFuncion.ADD));
+		distributte(new Task(TipoDeFuncion.ADD,v));
 		barrera.ready();
 	}
 	
@@ -67,7 +67,7 @@ public class MonitorConcurDerivative {
 	 * @param v, a vector from which to get the second operands.
 	 * @precondition dimension() == v.dimension(). */
 	public synchronized void sub(MonitorConcurDerivative v) {
-		distributte(new Task(TipoDeFuncion.SUB));
+		distributte(new Task(TipoDeFuncion.SUB,v));
 		barrera.ready();
 	}
 	
@@ -76,7 +76,7 @@ public class MonitorConcurDerivative {
 	 * @param v, a vector from which to get the second operands.
 	 * @precondition dimension() == v.dimension(). */
 	public synchronized void mul(MonitorConcurDerivative v) {
-		distributte(new Task(TipoDeFuncion.MUL));
+		distributte(new Task(TipoDeFuncion.MUL,v));
 		barrera.ready();
 	}
 	
@@ -85,7 +85,7 @@ public class MonitorConcurDerivative {
 	 * @param v, a vector from which to get the second operands.
 	 * @precondition dimension() == v.dimension(). */
 	public synchronized void div(MonitorConcurDerivative v) {
-		distributte(new Task(TipoDeFuncion.DIV));
+		distributte(new Task(TipoDeFuncion.DIV,v));
 		barrera.ready();
 	}
 	
